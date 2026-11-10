@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en" class="fullscreen-bg">
+
+<head>
+    <title>Sistem Informasi CAT - Biro Kepegawaian - Kementerian Pertahanan</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    
+	<link rel="icon" href="assets/img/logo-kemhan.png">
+    <link rel="stylesheet" href="vendor/bootstrap-v4/css/bootstrap.min.css">
+    <link rel="stylesheet" href="vendor/font-awesome-5/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/roboto.min.css?_dc=1662000000">
+    <link rel="stylesheet" href="assets/css/tinymce.css?_dc=1662000000">
+    <link rel="stylesheet" href="assets/css/custom.min.css?_dc=1662000000">
+</head>
+
+<body>
+    <div class="wrapper">
+		<div class="bg"><img src="assets/img/bg.png"></div>
+		<div class="container">
+			<div class="header">
+				<div class="logo logo-center">
+					<img src="assets/img/logo-kemhan.png">
+					<div>
+						<h2>BIRO KEPEGAWAIAN</h2>
+						<h2>KEMENTERIAN PERTAHANAN RI</h2>
+						<h6>CAT Kemhan</h6>
+					</div>
+				</div>
+			</div>
+			<div class="card login">
+				<div class="card-body">
+					<h4>Registrasi ID Server</h4>
+					<p>Silahkan masukkan ID server</p>
+					<form id="fmRegister" name="fmRegister" method="POST" action="server/register/save" class="form-ajax">
+						<div class="form-group">
+							<label for="server_id">ID Server</label>
+							<div class="row">
+								<div class="col-sm-12">
+									<input type="text" class="form-control" id="server_id" name="server_id" placeholder="Masukan ID Server">
+								</div>
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="pin">PIN</label>
+							<div class="row">
+								<div class="col-sm-12">
+									<input type="text" class="form-control" id="pin" name="pin" placeholder="Masukan PIN Server">
+								</div>
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="serial">Serial</label>
+							<p class="form-control-static"><strong style="font-size: 16px">SRV-JKT-0001-2022</strong>&nbsp;</p>
+							<input type="hidden" name="serial" value="SRV-JKT-0001-2022">
+						</div>
+						<button type="button" class="btn btn-success btn-block btn-form-ajax">SUBMIT</button>
+					</form>
+				</div>
+				<div class="card-footer">
+					
+				</div>
+			</div>
+		</div>
+    </div>
+
+    <script>
+	    var baseURL = '';
+	    var uniqueID = 'STATIC-UI-KIT-NO-LIVE-KEY';
+	</script>
+
+	<script src="vendor/jquery/jquery-3.2.1.min.js"></script>
+	<script src="vendor/jquery/jquery.form.min.js"></script>
+	<script src="vendor/bootstrap-v4/js/bootstrap.min.js"></script>
+	<script src="assets/js/custom.min.js?_dc=1662000000"></script>
+	
+    </body>
+
+</html>

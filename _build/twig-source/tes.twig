@@ -1,0 +1,49 @@
+{% extends "master.twig" %}
+{% block content %}
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-8">
+				<div class="card card-bg">
+					<div class="card-body">
+						<h4>Konfirmasi Mulai Tes</h4>
+						<form id="fmTes" name="fmTes" method="POST" action="{{base_url}}peserta/exam/start" class="form-custom form-ajax">
+							<div class="form-group">
+								<label>Nama Tes</label>
+								<p class="form-control-static">{{tes.nama_tes}}&nbsp;</p>
+							</div>
+							<div class="form-group">
+								<label>Status Tes</label>
+								<p class="form-control-static blink"><strong>{{tes.status}}</strong>&nbsp;</p>
+							</div>
+							<div class="form-group">
+								<label>Materi Ujian</label>
+								<p class="form-control-static">{{tes.nama_materi}}&nbsp;</p>
+							</div>
+							<div class="form-group">
+								<label>Alokasi Waktu Tes</label>
+								<p class="form-control-static">{{tes.jm_waktu_text}}&nbsp;</p>
+							</div>
+							<div class="form-group">
+								<label>Jumlah Soal</label>
+								<p class="form-control-static">{{tes.jm_soal}}&nbsp;</p>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+			<div class="col-sm-4">
+				<div class="card card-bg">
+					<div class="card-body">
+						<p>Tombol MULAI hanya akan aktif apabila waktu sekarang sudah melewati waktu mulai tes</p>
+						{% if tes.status == "Selesai" %}
+							<!--<a href="{{base_url}}peserta/logout" class="btn btn-danger btn-logout w-100 rounded-pill ">LOGOUT</a>-->
+							<button type="button" class="btn btn-primary w-100 rounded-pill btn-form-ajax">MULAI ULANG</button>
+						{% else %}
+							<button type="button" class="btn btn-primary w-100 rounded-pill btn-form-ajax">MULAI</button>
+						{% endif %}
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock %}

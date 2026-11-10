@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<style>
+		* {
+			box-sizing: border-box;         /* For IE and modern versions of Chrome */
+			-moz-box-sizing: border-box;    /* For Firefox                          */
+			-webkit-box-sizing: border-box; /* For Safari                           */
+		}
+
+		html, body {
+			height: 100%;
+			margin: 0;
+		}
+
+		textarea {
+			width: 100%;
+			height: 99%; 
+			font-family: 'Courier New';
+			white-space: nowrap;  
+			overflow: auto;
+		}
+	</style>
+</head>
+<body>
+	<!--<textarea id="code" spellcheck="false" wrap="soft"></textarea>-->
+	<div id="code"></div>
+</body>
+<script type="text/javascript" src="beautify-html.js"></script>
+<script type="text/javascript" src="codeflask.min.js"></script>
+<script type="text/javascript">
+	var HtmlCode = top.tinymce.activeEditor.getContent({ source_view: !0 });
+	var params = top.tinymce.activeEditor.windowManager.getParams();
+	var flask = new CodeFlask('#code', { language: 'js' });
+
+    if (typeof(html_beautify) === 'function') {
+        options = {
+            'indent_size': 4
+        };  
+
+        HtmlCode = html_beautify(HtmlCode.replace(/></g, ">\n<"), options);
+        flask.updateCode(HtmlCode);
+    }
+
+    function save() {
+    	top.tinymce.activeEditor.setContent(flask.getCode());
+    	top.tinymce.activeEditor.windowManager.close();
+    }
+
+    params['save'] = save;
+	top.tinymce.activeEditor.windowManager.setParams(params);
+</script>
+</html>

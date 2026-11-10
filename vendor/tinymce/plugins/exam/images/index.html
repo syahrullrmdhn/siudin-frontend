@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link href="style.css" rel="stylesheet">
+</head>
+<body>
+	<input class="input" id="input" type="file" multiple onchange="previewImages(this.files)">
+	<div class="drop" id="drop">Drop Image Here</div>
+	<div class="preview" id="preview"></div>
+</body>
+<script type="text/javascript">
+	if (window.FileReader) {
+	    var drop, preview;
+	    addEventHandler(window, 'load', function() {
+	        drop = document.getElementById('drop');
+
+	        function cancel(e) {
+	            if (e.preventDefault) {
+	                e.preventDefault();
+	            }
+	            return false;
+	        }
+
+	        addEventHandler(drop, 'dragover', cancel);
+	        addEventHandler(drop, 'dragenter', cancel);
+	        addEventHandler(drop, 'drop', function(e) {
+	            e = e || window.event;
+	            if (e.preventDefault) {
+	                e.preventDefault();
+	            }
+
+	            var dt = e.dataTransfer;
+	            var files = dt.files;
+	            
+	            previewImages(files);
+	            return false;
+	        });
+
+	        Function.prototype.bindToEventHandler = function bindToEventHandler() {
+	            var handler = this;
+	            var boundParameters = Array.prototype.slice.call(arguments);
+	            console.log(boundParameters);
+
+	            return function(e) {
+	                e = e || window.event;
+	                boundParameters.unshift(e);
+	                handler.apply(this, boundParameters);
+	            }
+	        };
+	    });
+	} else {
+	    document.getElementById('status').innerHTML = 'Your browser does not support the HTML5 FileReader.';
+	}
+
+	function previewImages(files) {
+		preview = document.getElementById('preview');
+
+		for (var i = 0; i < files.length; i++) {
+            var file = files[i];
+            var reader = new FileReader();
+
+            reader.readAsDataURL(file);
+            addEventHandler(reader, 'loadend', function(e, file) {
+                var bin = this.result;
+                var img = document.createElement("img");
+
+                img.file = file;
+                img.src = bin;
+                preview.appendChild(img);
+            }.bindToEventHandler(file));
+        }
+	}
+
+	function addEventHandler(obj, evt, handler) {
+	    if (obj.addEventListener) {
+	        obj.addEventListener(evt, handler, false);
+	    } else if (obj.attachEvent) {
+	        obj.attachEvent('on' + evt, handler);
+	    } else {
+	        obj['on' + evt] = handler;
+	    }
+	}
+
+
+	function insert() {
+		setTimeout(function() {
+			var preview = document.getElementById('preview');
+			var elements = preview.getElementsByTagName('img');
+			var length = elements.length;
+
+			for (i = 0; i < length; i++) {
+				top.tinymce.activeEditor.insertContent('<img src="' + elements[i].getAttribute('src') + '" width="100%">');
+			}
+
+			top.tinymce.activeEditor.windowManager.close();
+		}, 100);
+	}
+
+	params = top.tinymce.activeEditor.windowManager.getParams();
+	params['insert'] = insert;
+
+	top.tinymce.activeEditor.windowManager.setParams(params);
+</script>
+</html>

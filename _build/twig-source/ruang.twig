@@ -1,0 +1,63 @@
+{% extends "cetak.twig" %}
+{% block content %}
+	{% for page in data %}
+		<div class="page">
+			<table width="100%">
+				<tr>
+					<td width="100"><img src="{{ system_logo }}" height="80"></td>
+					<td>
+						<CENTER>
+							<strong class="f12 upper">
+								INFORMASI RUANG, PENGAWAS DAN PESERTA<BR>
+							</strong>
+						</CENTER></td>
+					<td width="100"></div></td>
+				</tr>
+			</table>
+			<table class="detail" width="100%">
+				<tr>
+					<td width="150">Kode Ruang</td><td width="10">:</td><td><span style="width:100%;">{{ ruang.ruang_id }}</span></td>
+				</tr>
+				<tr>
+					<td>PIN Ruang</td><td>:</td><td><span style="width:100%;">{{ ruang.password }}</span></td>
+				</tr>
+				<tr>
+					<td>Nama Ruang</td><td>:</td><td><span style="width:100%;">{{ ruang.nama_ruang }}</span></td>
+				</tr>
+                <tr>
+					<td>Nama Satuan Pendidikan</td><td>:</td><td><span style="width:100%;">{{ ruang.nama_sekolah }}</span></td>
+				</tr>
+			</table>
+			<table class="datatable full" width="100%">
+				<tr style="height:30px">
+					<th>No.</th>
+					<th>Username</th>
+					<th>Password</th>
+					<th>Nama Peserta</th>
+					<th>Sesi</th>
+				</tr>
+				{% for row in page.data %}
+				<tr>
+					<td width="15" align="center">{{ row.no }}</td>
+					<td width="100" align="center">{{ row.username }}</td>
+					<td width="100" align="center">{{ row.password }}</td>
+					<td width="*">{{ row.nama }}</td>
+					<td width="50" align="center">{{ row.sesi }}</td>
+				</tr>
+				{% endfor %}
+			</table>
+			<BR><BR><BR><BR>
+			<div class="footer">
+				<table width="100%" height="30">
+				<tr>
+					<td width="25px" style="border:1px solid black"></td>
+					<td width="5px">&nbsp;</td>
+					<td style="border:1px solid black;font-weight:bold;font-size:14px;text-align:center;">{{ system_tes }}</td>
+					<td width="5px">&nbsp;</td>
+					<td width="25px" style="border:1px solid black"></td>
+				</tr>
+				</table>
+			</div>
+		</div>
+    {% endfor %}
+{% endblock %}

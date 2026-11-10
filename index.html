@@ -1,0 +1,246 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SIUDIN UBK — Static UI Kit</title>
+<link rel="stylesheet" href="vendor/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" href="vendor/font-awesome-6/css/all.min.css">
+<link rel="stylesheet" href="assets/css/framework.min.css">
+<style>
+:root{--ink:#1b2430;--muted:#68758a;--line:#e3e8ef;--brand:#0d5c8c;--bg:#f5f7fa}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:'Segoe UI',Roboto,Arial,sans-serif}
+.hero{background:linear-gradient(135deg,#0d5c8c,#0b3f61);color:#fff;padding:38px 0 34px}
+.hero h1{margin:0 0 6px;font-size:26px;font-weight:700;letter-spacing:.2px}
+.hero p{margin:0;opacity:.85;font-size:14px}
+.hero .meta{margin-top:16px;font-size:12.5px;opacity:.8}
+.hero .meta code{background:rgba(255,255,255,.14);color:#fff;padding:2px 7px;border-radius:4px}
+.wrap{max-width:1160px;margin:0 auto;padding:0 18px}
+section{margin:30px 0}
+h2.sec{font-size:15px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;color:var(--brand);margin:0 0 14px;padding-bottom:8px;border-bottom:2px solid var(--line)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(285px,1fr));gap:14px}
+a.card{display:block;background:#fff;border:1px solid var(--line);border-radius:10px;padding:15px 16px;text-decoration:none;color:inherit;transition:.16s}
+a.card:hover{border-color:#b9cfe0;box-shadow:0 6px 18px rgba(13,92,140,.10);transform:translateY(-2px)}
+a.card .t{font-weight:600;font-size:14.5px;margin-bottom:5px;color:#13202e}
+a.card .f{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:11.5px;color:var(--brand);margin-bottom:7px}
+a.card .d{font-size:12.5px;color:var(--muted);line-height:1.55}
+footer{border-top:1px solid var(--line);margin-top:34px;padding:20px 0 34px;font-size:12.5px;color:var(--muted);text-align:center}
+</style>
+</head>
+<body>
+<div class="hero">
+  <div class="wrap">
+    <h1><i class="fa fa-desktop"></i> SIUDIN UBK — Static UI Kit</h1>
+    <p>Hasil render template Twig SIUDIN / CAT Kemhan menjadi HTML statis, siap dipakai ulang di proyek lain.</p>
+    <div class="meta">
+      Tech stack sama: <code>Bootstrap 4</code> <code>jQuery 3.2.1</code> <code>Font Awesome 5/6</code>
+      <code>custom.min.css</code> <code>framework.min.js</code> <code>Imat</code>
+      &nbsp;·&nbsp; 33 halaman
+    </div>
+  </div>
+</div>
+<div class="wrap">
+  <section>
+    <h2 class="sec">Halaman Publik &amp; Auth</h2>
+    <div class="grid">
+          <a class="card" href="login.html">
+        <div class="t">Login Peserta</div>
+        <div class="f">login.html</div>
+        <div class="d">Form login + modal lupa password. asal: login-tes.twig</div>
+      </a>
+          <a class="card" href="pendaftaran.html">
+        <div class="t">Pendaftaran / Buat Akun</div>
+        <div class="f">pendaftaran.html</div>
+        <div class="d">Form registrasi peserta. asal: pendaftaran.twig</div>
+      </a>
+          <a class="card" href="reset.html">
+        <div class="t">Reset Password</div>
+        <div class="f">reset.html</div>
+        <div class="d">Form reset password + validasi. asal: reset.twig</div>
+      </a>
+          <a class="card" href="register-server.html">
+        <div class="t">Registrasi ID Server</div>
+        <div class="f">register-server.html</div>
+        <div class="d">Form registrasi server daerah. asal: register-server.twig</div>
+      </a>
+          <a class="card" href="404.html">
+        <div class="t">Halaman 404</div>
+        <div class="f">404.html</div>
+        <div class="d">Halaman tidak ditemukan. asal: 404.twig</div>
+      </a>
+          <a class="card" href="403-browser.html">
+        <div class="t">Halaman 403 Browser</div>
+        <div class="f">403-browser.html</div>
+        <div class="d">Blokir browser non-exam. asal: browser.twig</div>
+      </a>
+        </div>
+  </section>
+  <section>
+    <h2 class="sec">Admin / Backoffice</h2>
+    <div class="grid">
+          <a class="card" href="admin.html">
+        <div class="t">Admin Layout (kosong)</div>
+        <div class="f">admin.html</div>
+        <div class="d">Kerangka menu + header + content kosong. asal: admin.twig</div>
+      </a>
+          <a class="card" href="admin-dashboard.html">
+        <div class="t">Admin Dashboard</div>
+        <div class="f">admin-dashboard.html</div>
+        <div class="d">Contoh isi dashboard + Pengumuman + Download.</div>
+      </a>
+          <a class="card" href="admin-contoh.html">
+        <div class="t">Admin Contoh Panel</div>
+        <div class="f">admin-contoh.html</div>
+        <div class="d">Contoh panel sederhana. asal: contoh.twig</div>
+      </a>
+          <a class="card" href="admin-auth-masa-kerja.html">
+        <div class="t">Auth Masa Kerja</div>
+        <div class="f">admin-auth-masa-kerja.html</div>
+        <div class="d">Tabel DataTable + filter UO/Kotama. asal: authMasaKerja.twig</div>
+      </a>
+          <a class="card" href="admin-rekap-uo.html">
+        <div class="t">Rekap per UO / Kotama</div>
+        <div class="f">admin-rekap-uo.html</div>
+        <div class="d">Filter + form cetak. asal: rekap_uo.twig</div>
+      </a>
+          <a class="card" href="admin-rekap-lokasi.html">
+        <div class="t">Rekap per Lokasi Ujian</div>
+        <div class="f">admin-rekap-lokasi.html</div>
+        <div class="d">Filter + form cetak. asal: rekap_lokasi.twig</div>
+      </a>
+          <a class="card" href="admin-rekap-jenis-ujian.html">
+        <div class="t">Rekap per Jenis Ujian</div>
+        <div class="f">admin-rekap-jenis-ujian.html</div>
+        <div class="d">Filter + form cetak. asal: rekap_jenis_ujian.twig</div>
+      </a>
+        </div>
+  </section>
+  <section>
+    <h2 class="sec">Peserta / Ujian</h2>
+    <div class="grid">
+          <a class="card" href="peserta-dashboard.html">
+        <div class="t">Dashboard Peserta</div>
+        <div class="f">peserta-dashboard.html</div>
+        <div class="d">Profil, upload berkas, jadwal, kartu, sertifikat. asal: dashboard.twig</div>
+      </a>
+          <a class="card" href="peserta-petunjuk.html">
+        <div class="t">Petunjuk / Info Peserta</div>
+        <div class="f">peserta-petunjuk.html</div>
+        <div class="d">Info biodata + tombol mulai. asal: petunjuk.twig</div>
+      </a>
+          <a class="card" href="peserta-tes.html">
+        <div class="t">Konfirmasi Mulai Tes</div>
+        <div class="f">peserta-tes.html</div>
+        <div class="d">Ringkasan tes + tombol MULAI. asal: tes.twig</div>
+      </a>
+          <a class="card" href="peserta-token.html">
+        <div class="t">Status Tes &amp; Token</div>
+        <div class="f">peserta-token.html</div>
+        <div class="d">Daftar tes + input token. asal: token.twig</div>
+      </a>
+          <a class="card" href="peserta-exam-intro.html">
+        <div class="t">Intro Ujian (Tour)</div>
+        <div class="f">peserta-exam-intro.html</div>
+        <div class="d">Layar ujian + introJs tour. asal: intro.twig</div>
+      </a>
+          <a class="card" href="peserta-exam.html">
+        <div class="t">Layar Ujian (Exam)</div>
+        <div class="f">peserta-exam.html</div>
+        <div class="d">Layout exam tanpa tour. asal: exam-new.twig</div>
+      </a>
+          <a class="card" href="viewer.html">
+        <div class="t">Livescore Viewer</div>
+        <div class="f">viewer.html</div>
+        <div class="d">Tabel live score. asal: viewer.twig</div>
+      </a>
+          <a class="card" href="reader.html">
+        <div class="t">QR Reader</div>
+        <div class="f">reader.html</div>
+        <div class="d">Scanner QR kamera. asal: reader.twig</div>
+      </a>
+        </div>
+  </section>
+  <section>
+    <h2 class="sec">Cetak / Print</h2>
+    <div class="grid">
+          <a class="card" href="cetak-kartu.html">
+        <div class="t">Kartu Peserta (grid)</div>
+        <div class="f">cetak-kartu.html</div>
+        <div class="d">Grid kartu + QR code. asal: kartu.twig</div>
+      </a>
+          <a class="card" href="cetak-kartu-individual.html">
+        <div class="t">Kartu Peserta (single)</div>
+        <div class="f">cetak-kartu-individual.html</div>
+        <div class="d">Kartu per peserta. asal: individual.twig</div>
+      </a>
+          <a class="card" href="cetak-daftar-hadir.html">
+        <div class="t">Daftar Hadir</div>
+        <div class="f">cetak-daftar-hadir.html</div>
+        <div class="d">Absensi + kolom TTD. asal: absen.twig</div>
+      </a>
+          <a class="card" href="cetak-bap.html">
+        <div class="t">Berita Acara (BAP)</div>
+        <div class="f">cetak-bap.html</div>
+        <div class="d">BAP + centang kasus. asal: bap.twig</div>
+      </a>
+          <a class="card" href="cetak-ruang.html">
+        <div class="t">Info Ruang &amp; Peserta</div>
+        <div class="f">cetak-ruang.html</div>
+        <div class="d">Daftar ruang + pengawas. asal: ruang.twig</div>
+      </a>
+          <a class="card" href="cetak-sesi.html">
+        <div class="t">Rekap Sesi Server</div>
+        <div class="f">cetak-sesi.html</div>
+        <div class="d">Tabel sesi. asal: sesi.twig</div>
+      </a>
+          <a class="card" href="cetak-sertifikat.html">
+        <div class="t">Daftar Nilai / SLTU</div>
+        <div class="f">cetak-sertifikat.html</div>
+        <div class="d">Sertifikat + surat lulus. asal: sertifikat.twig</div>
+      </a>
+          <a class="card" href="cetak-rekap-uo.html">
+        <div class="t">Rekap UO (print)</div>
+        <div class="f">cetak-rekap-uo.html</div>
+        <div class="d">Rekap tabel + tanda tangan. asal: rekap_uo_print.twig</div>
+      </a>
+          <a class="card" href="cetak-rekap-lokasi.html">
+        <div class="t">Rekap Lokasi (print)</div>
+        <div class="f">cetak-rekap-lokasi.html</div>
+        <div class="d">Rekap tabel + tanda tangan. asal: rekap_lokasi_print.twig</div>
+      </a>
+          <a class="card" href="cetak-rekap-jenis-ujian.html">
+        <div class="t">Rekap Jenis Ujian (print)</div>
+        <div class="f">cetak-rekap-jenis-ujian.html</div>
+        <div class="d">Rekap tabel + tanda tangan. asal: rekap_jenis_ujian_print.twig</div>
+      </a>
+          <a class="card" href="cetak-gambar.html">
+        <div class="t">Cetak Gambar</div>
+        <div class="f">cetak-gambar.html</div>
+        <div class="d">Wrapper halaman gambar. asal: gambar.twig</div>
+      </a>
+        </div>
+  </section>
+  <section>
+    <h2 class="sec">Partial</h2>
+    <div class="grid">
+          <a class="card" href="partial-result.html">
+        <div class="t">Partial: Hasil Tes</div>
+        <div class="f">partial-result.html</div>
+        <div class="d">Fragment tabel hasil. asal: result.twig</div>
+      </a>
+        </div>
+  </section>
+  <section>
+    <h2 class="sec">Catatan</h2>
+    <div class="card" style="background:#fff;border:1px solid var(--line);border-radius:10px;padding:16px;font-size:13px;line-height:1.7;color:#3a4757">
+      <p style="margin:0 0 8px">Semua halaman memakai aset CSS/JS asli dari <code>public/assets</code> dan <code>public/vendor</code> aplikasi SIUDIN, jadi class, komponen, dan perilaku JS identik.</p>
+      <p style="margin:0 0 8px">Endpoint backend (login, simpan, upload, cetak dinamis) tidak tersedia — semua data terisi <em>mock data</em>. Form yang di-submit tidak akan memproses apa pun.</p>
+      <p style="margin:0">Halaman dirender ulang dengan: <code>php _build/build.php</code></p>
+    </div>
+  </section>
+</div>
+<footer class="wrap">
+  Sumber template: <code>/var/local/website/app/views/twig</code> &nbsp;·&nbsp; Dirender 10 November 2026 06:34</footer>
+</body>
+</html>

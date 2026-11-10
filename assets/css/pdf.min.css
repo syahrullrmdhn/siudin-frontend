@@ -1,0 +1,127 @@
+body {
+	font-size: 12px;
+	font-family: 'OpenSans', sans-serif;
+	width: 100%;
+	page-break-avoid:inside;
+}
+
+.cetak-header {
+	position: relative;
+	width: 100%;
+	border-bottom: 2px solid #333;
+	margin-bottom: 2px;
+}
+
+.cetak-border {
+	margin-bottom: 18px;
+	border-bottom: 1px solid #333;
+}
+
+.cetak-kiri {
+	float: left;
+	background: red;
+	width: 50%;
+}
+
+.cetak-kanan {
+	float: right;
+	background: blue;
+	width: 50%;
+}
+
+.logo { height: 70px; }
+.logo-bsnp { height: 50px; }
+
+h1 {
+	font-size: 14px;
+	font-weight: bold;
+	margin: 5px;
+}
+
+h2 {
+	font-size: 13px;
+	font-weight: bold;
+	margin: 5px;
+}
+
+td, th {
+	padding: 1mm 2mm;
+	border: 0.1mm solid #666;
+	border-collapse: collapse;
+}
+
+thead { display: table-header-group; }
+/*
+tr:nth-child(even) {background: #eee; }
+tr:nth-child(odd) {background: #fff; }
+*/
+th {
+	background: #eee;
+}
+
+.nb {
+	background: #fff;
+}
+
+.clear {
+	background: transparent !important;
+	border: none !important;
+	padding: 0 !important;
+}
+
+.none {
+	background: #fff;
+	border: none;
+}
+
+.dotted {
+	background: #fff;
+	border: none;
+	border-bottom: 0.1mm dotted #666;
+}
+
+.ttd {
+	width: 130px;
+	background: #fff;
+	border: none;
+}
+
+.fh {
+	background: #fff;
+	border: none;
+	font-weight: bold;
+	text-transform: uppercase;
+}
+
+.nn {
+	background: #fff;
+	border: none;
+	padding: 8px 0 0 0;
+}
+
+.bb {
+	background: #fff;
+	padding: 8px 0 0 0;
+	border: none;
+	border-bottom: 1px solid #333;
+}
+
+.kartu-wrapper table {
+	border: none;
+}
+
+.kartu-wrapper td {
+	border: none;
+}
+
+.barcode {
+    padding: 1mm;
+    margin: 0;
+    vertical-align: top;
+    color: #000044;
+}
+
+.barcodecell {
+    text-align: center;
+    vertical-align: middle;
+}

@@ -1,0 +1,52 @@
+{% extends "admin.twig"%}
+
+{% block content %}
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            Autentifikasi Masa Kerja
+        </div>
+        <div class="panel-body">
+        <div class="row">
+            <div class="form-group col-md-4 col-lg-4">
+                <label for="exampleFormControlInput1">UO / Kotama :</label>
+                <form id="form-cari-tabs1" class="mb-0 pb-0">
+                        <select name="ou_" class="form-control" id="ou_">
+                            <option value="">-- Pilih UO / Kotama --</option>
+                        </select>
+                </form>
+            </div>
+        </div>
+            <div class="table-responsive">
+            <table class="table table-bordered" id="table" width="100%">
+                <thead>
+                <tr>
+                    <th style="width: 10px">#</th>
+                    <th>Nama Pegawai</th>
+                    <th>Nip</th>
+                    <th>UO / Kotama</th>
+                    <th>Satker</th>
+                    <th>Jabatan</th>
+                    <th>Pangkat</th>
+                    <th>Masa Kerjaa</th>
+                    {# <th>Jenis Ujian</th>
+                    <th>Keterangan</th>
+                    <th style="width: 150px">Verifikasi</th> #}
+                </tr>
+                </thead>
+            </table>
+        </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block script %}
+ 
+    <script>
+        $(document).ready(function () {
+            var t = $('#table').DataTable({
+           
+            });
+        });
+    </script>
+   
+{% endblock %}

@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="en" class="fullscreen-bg">
+
+<head>
+    <title>Sistem Informasi CAT - Biro Kepegawaian - Kementerian Pertahanan</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    
+	<link rel="icon" href="assets/img/logo-kemhan.png">
+    <link rel="stylesheet" href="vendor/bootstrap-v4/css/bootstrap.min.css">
+    <link rel="stylesheet" href="vendor/font-awesome-5/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/roboto.min.css?_dc=1662000000">
+    <link rel="stylesheet" href="assets/css/tinymce.css?_dc=1662000000">
+    <link rel="stylesheet" href="assets/css/new.min.css?_dc=1662000000">
+</head>
+
+<body>
+    <div class="params" style="display: none" data-materi="KOMPETENSI MANAJERIAL" data-tingkat="TK-I" data-babon="1"></div>
+    <div class="wrapper">
+		<div class="header">
+            <div class="header-left">
+                <div class="logo"><img src="assets/img/logo-kemhan.png"></div>
+                <div class="title">
+                    <h2>BIRO KEPEGAWAIAN</h2>
+                    <h2>KEMENTERIAN PERTAHANAN RI</h2>
+                    <h6>CAT Kemhan</h6>
+                </div>
+            </div>
+            <div class="header-toggle">
+                <a href="javascript:;" id="sidebar-toggle"><span class="fa fa-bars"></span></a>
+            </div>
+            <div class="header-right">
+                <div class="user-text">
+                    						<h6>Administrator</h6>
+						<!--<a href="javascript:;" id="btnLogout" class="btn btn-sm btn-secondary logout btnLogout">Logout</a>-->
+					                </div>
+                <div class="user-icon">
+                    <!--<span class="fa fa-user-graduate"></soan>-->
+                    <div class="photo"><img src="assets/img/men.png"></div>
+                </div>
+            </div>
+        </div>
+        <div class="main exam">
+            <div class="sidebar">
+                <div class="photobox">
+                                        <div class="photo"><img src="assets/img/men.png"></div>
+                    <div class="photo-id">Nama Peserta</div>
+                    <div class="photo-name">Nomor Peserta</div>
+                                    </div>
+                <div class="sidebar-title">
+                    Tes
+                </div>
+                <div class="sidebar-content">
+                    <ul class="nomor-soal" id="nomor-soal">
+
+                    </ul>
+                </div>
+                <div class="sidebar-footer">
+                    <button class="btn btn-sm btn-secondary" id="sidebar-close"><span class="fa fa-times"></span></button>
+                </div>
+            </div>
+            <div class="content">
+                <div class="bar-top">
+					<span class="soal-nomor-text">SOAL NOMOR</span>
+					<div class="soal-title" id="page">1</div>
+					<div id="page-count" style="display:none"></div>
+					<div class="right">
+                        <button class="btn btn-light btn-zoom-out">
+							<span class="fa fa-search-minus"></span>
+						</button>
+                        <button class="btn btn-light btn-zoom-in">
+							<span class="fa fa-search-plus"></span>
+						</button>
+						<div class="timer js-ujian">
+							<div class="timer-label d-none d-sm-block">Sisa Waktu</div>
+							<div class="timer-time" id="timer">00:00:00</div>
+						</div>
+                        <!--
+                        <button class="btn btn-primary btn-webcam" data-toggle="modal" data-target="#webcam">
+							<span class="fa fa-camera"></span>
+						</button>
+                        -->
+					</div>
+				</div>
+				<div class="soal-wrapper" id="content">
+					<div class="soal"><p>Soal dimuat melalui AJAX pada aplikasi aslinya.</p></div>
+				</div>
+				<div class="button-wrapper">
+					<button id="soal-back" class="btn btn-sm btn-light sebelum js-ujian">
+						<span class="fa fa-arrow-left"></span><span class="btn-text">Sebelumnya</span>
+					</button>
+					<button id="soal-next" class="btn btn-sm btn-light sesudah js-ujian">
+						<span class="btn-text">Selanjutnya</span><span class="fa fa-arrow-right"></span>
+					</button>
+                    
+					<button id="soal-ragu" class="btn btn-sm btn-warning ragu js-ujian">
+						<div class="check-ragu"></div>Ragu Ragu
+					</button>
+					<button id="soal-selesai" class="btn btn-sm btn-success">
+						SELESAI<span class="fa fa-check-circle"></span>
+					</button>
+				</div>
+            </div>
+        </div>
+        
+    	    </div>
+	        <!--
+        <div class="modal fade" id="webcam" role="dialog" aria-labelledby="webcam" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Webcam</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body d-flex align-items-center justify-content-center">
+                        <div class="webcam" id="webcam-image"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        -->
+    
+    <script>
+	    var baseURL = '';
+	    var uniqueID = 'STATIC-UI-KIT-NO-LIVE-KEY';
+	</script>
+
+	<script src="vendor/jquery/jquery-3.2.1.min.js"></script>
+	<script src="vendor/jquery/jquery.form.min.js"></script>
+    <script src="vendor/jquery/jquery.slimscroll.min.js"></script>
+	<script src="vendor/bootstrap-v4/js/bootstrap.min.js"></script>
+    <script src="vendor/webcam/webcam.min.js"></script>
+	<script src="assets/js/custom.min.js?_dc=1662000000"></script>
+			<script src="assets/js/exam.min.js?_dc=1662000000"></script>
+	</body>
+
+</html>

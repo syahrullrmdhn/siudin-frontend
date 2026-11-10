@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en" class="fullscreen-bg">
+
+<head>
+    <title>Sistem Informasi CAT - Biro Kepegawaian - Kementerian Pertahanan</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    
+	<link rel="icon" href="assets/img/logo-kemhan.png">
+    <link rel="stylesheet" href="vendor/bootstrap-v4/css/bootstrap.min.css">
+    <link rel="stylesheet" href="vendor/font-awesome-5/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/roboto.min.css?_dc=1662000000">
+    <link rel="stylesheet" href="assets/css/tinymce.css?_dc=1662000000">
+    <link rel="stylesheet" href="assets/css/custom.min.css?_dc=1662000000">
+</head>
+
+<body>
+    <div class="wrapper">
+		<div class="bg"></div>
+        <div class="header mx-5 d-flex">
+            <div class="logo logo-master">
+                <img src="assets/img/logo-kemhan.png">
+                <div>
+                    <h2>BIRO KEPEGAWAIAN</h2>
+                    <h2>KEMENTERIAN PERTAHANAN RI</h2>
+                    <h6>CAT Kemhan</h6>
+                </div>
+            </div>
+            <div class="user">
+                <div class="user-text">
+                    						<h6>Administrator</h6>
+						<a href="javascript:;" id="btnLogout" class="btn btn-sm btn-white logout btnLogout">Logout</a>
+					                </div>
+                <div class="user-icon">
+                    <span class="fa fa-user-graduate"></span>
+                </div>
+            </div>
+        </div>
+        	<div class="container">
+		<div class="card card-bg" style="max-width: 700px">
+			<div class="card-body">
+								<h4>Informasi Peserta</h4>
+				<form id="fmBio" name="fmBio" method="POST" action="peserta/exam/mulai" class="form-custom form-ajax">
+					<div class="form-group">
+						<label for="nisn">NIP</label>
+						<p class="form-control-static">197805122003121004&nbsp;</p>
+					</div>
+					<div class="form-group">
+						<label for="nama">Nama Peserta</label>
+						<p class="form-control-static">Ahmad Fauzi, S.Kom&nbsp;</p>
+					</div>
+					<div class="form-group">
+						<label for="gender">Tempat Lahir</label>
+						<p class="form-control-static">Jakarta&nbsp;</p>
+					</div>
+					<div class="form-group">
+						<label for="lahir">Tanggal Lahir</label>
+						<p class="form-control-static">1978-05-12&nbsp;</p>
+					</div>
+					<div class="form-group">
+						<label for="lahir">Jenis Kelamin</label>
+						<p class="form-control-static">Laki-laki&nbsp;</p>
+					</div>
+				</form>
+				<div class="row my-3">
+                    <div class="col-sm-6 py-1"><a href="peserta-exam-intro.html" class="btn btn-primary w-100 btn-form-ajax">Tutorial Ujian</a></div>
+                    <div class="col-sm-6 py-1"><a href="javascript:;" id="btnMulai" class="btn btn-success w-100 ml-auto">Mulai Ujian</a></div>
+                </div>
+			</div>
+		</div>
+	</div>
+    </div>
+	
+    
+    <script>
+	    var baseURL = '';
+	    var uniqueID = 'STATIC-UI-KIT-NO-LIVE-KEY';
+	</script>
+
+	<script src="vendor/jquery/jquery-3.2.1.min.js"></script>
+	<script src="vendor/jquery/jquery.form.min.js"></script>
+	<script src="vendor/bootstrap-v4/js/bootstrap.min.js"></script>
+    <script src="vendor/webcam/webcam.min.js"></script>
+	<script src="assets/js/custom.min.js?_dc=1662000000"></script>
+	
+    </body>
+
+</html>

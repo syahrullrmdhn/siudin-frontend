@@ -1,0 +1,118 @@
+{% extends "cetak.twig" %}
+{% block content %}
+	{% for page in data %}
+		<div class="page">
+			<table width="100%">
+				<tr>
+					<td width="100"><img src="{{ system_logo }}" height="80"></td>
+					<td>
+						<CENTER>
+							<strong class="f12 upper">
+								DAFTAR HADIR PESERTA<BR>
+								{{ system_tes|replace({"\n": "<BR>"})|raw }}
+							</strong>
+						</CENTER></td>
+					<td width="100"><div class="qrcode" id="qr_{{page.params.qrid}}" data-value="{{page.params.qrcode}}" style="float: right"></div></td>
+				</tr>
+			</table>
+			<table class="detail">
+				<tr>
+					<td>Provinsi</td><td>:</td><td colspan="4"><span style="width:100%;">{{ page.params.provinsi }}</span></td>
+				</tr>
+				<tr>
+					<td>Kota/Kabupaten</td><td>:</td><td colspan="4"><span style="width:100%;">{{ page.params.kota }}</span></td>
+				</tr>
+				<tr>
+					<td>Lokasi Ujian</td><td>:</td><td colspan="4"><span style="width:100%;">{{ page.params.nama_lokasi }}</span></td>
+				</tr>
+				<tr>
+					<td>Jenis Seleksi</td><td>:</td><td><span style="width:400px;">{{ page.params.nama_kegiatan }}</span></td>
+					<td>Sesi</td><td>:</td><td><span style="width:100px;">{{ page.params.sesi }}</span></td>
+				</tr>
+				<tr>
+					<td>Hari</td><td>:</td>
+					<td><span style="width:120px;">{{ page.params.nm_hari }}</span>TANGGAL : <span style="width:200px;">{{ page.params.tgl_ujian }}</span></td>
+					<td>Pukul</td><td>:</td><td><span style="width:100px;">{{ page.params.jam }}</span></td>
+				</tr>
+			</table>
+			<table class="datatable full" width="100%">
+				<tr style="height:30px">
+					<th>No.</th>
+					<th>Nopes</th>
+					<th>Nama Peserta<BR> </th>
+					<th>Tanda Tangan</th>
+					<th>Ket</th>
+				</tr>
+				{% for row in page.data %}
+				<tr>
+					<td width="15" align="center">{{ row.no }}</td>
+					<td width="100" align="center">{{ row.nopes }}</td>
+					<td width="*">{{ row.nama }}</td>
+					<td width="150"><span style="float:{{ row.float }};width:80px;">{{ row.no }}.</span></td>
+					<td width="100"></td>
+				</tr>
+				{% endfor %}
+			</table>
+			{% if page.params.isTtd %}
+			<table>
+				<tr><td colspan="2"><strong><i>Keterangan : </i></strong></td></tr>
+				<tr><td>1. Daftar hadir dicetak dan ditandatangani oleh peserta.</td></tr>
+				<tr><td>2. Pengawas ruang menyilang Nama Peserta yang tidak hadir.</td></tr>
+			</table>
+			<table width="100%">
+			<tr>
+				<td>
+					<table style="border:1px solid black">
+					<tr>
+						<td>Jumlah Peserta yang Seharusnya Hadir</td>
+						<td>:</td>
+						<td>_____ orang</td>
+					</tr>
+					<tr>
+						<td>Jumlah Peserta yang Tidak Hadir</td>
+						<td>:</td>
+						<td>_____ orang</td>
+					</tr>
+					<tr style="border-top:1px solid black">
+						<td>Jumlah Peserta Hadir</td>
+						<td>:</td>
+						<td>_____ orang</td>
+					</tr>
+					</table>
+				</td>
+				<td align="center" width="200">
+					Penanggung Jawab<BR><BR><BR><BR><BR>(<nip></nip>)<BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;NIP. <nip></nip>
+				</td>
+				<td align="center" width="200">
+					Pengawas<BR><BR><BR><BR><BR>(<nip></nip>)<BR><BR>&nbsp;&nbsp;&nbsp;NIP. <nip></nip>
+				</td>
+			</tr>
+			</table>
+			{% endif %}
+			<BR><BR><BR><BR>
+			<div class="footer">
+				<table width="100%" height="30">
+				<tr>
+					<td width="25px" style="border:1px solid black"></td>
+					<td width="5px">&nbsp;</td>
+					<td style="border:1px solid black;font-weight:bold;font-size:14px;text-align:center;">{{ system_tes }}</td>
+					<td width="5px">&nbsp;</td>
+					<td width="25px" style="border:1px solid black"></td>
+				</tr>
+				</table>
+			</div>
+		</div>
+    {% endfor %}
+    <script>
+    	$('.qrcode').each(function(){
+    		new QRCode(document.getElementById($(this).attr('id')), {
+			    text: $(this).attr('data-value'),
+			    width: 75,
+			    height: 75,
+			    colorDark : "#000000",
+			    colorLight : "#ffffff",
+			    correctLevel : QRCode.CorrectLevel.H
+			});
+    	});
+    </script>
+{% endblock %}

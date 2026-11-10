@@ -1,0 +1,198 @@
+<style>
+    body {
+        font-family: Arial;
+        font-size: 12pt;
+    }
+
+    .title td {
+        border: none;
+    }
+</style>
+
+
+{# <pagebreak> #}
+<table width="100%" border="0" class="title">
+    <tr><td align="center">SEKERTARIAT JENDERAL KEMHAN RI</td></tr>
+    <tr><td align="center">BIRO KEPEGAWAIAN</td></tr>
+    <tr><td align="center">TA {{thn}}</td></tr>
+    <tr><td align="center">&nbsp;</td></tr>
+    <tr><td align="center">SISTEM INFORMASI COMPUTER ASSISSTED TEST (CAT)</td></tr>
+    <tr><td align="center">REKAPITULASI PESERTA UJIAN</td></tr>
+    {# <tr><td align="center">{{nama_kegiatan}}</td></tr> #}
+</table>
+<br/><br/>
+<table cellpadding="5" cellspacing="0" border="1" width="100%">
+    <tr>
+        <th rowspan="2">No</th>
+        <th rowspan="2">Unit Organisasi</th>
+        <th colspan="3">Registrasi</th>
+        <th colspan="3">Verifikasi satker</th>
+        <th colspan="4">Persetujuan Kotama</th>
+        <th colspan="4">Persetujuan Pusat</th>
+    </tr>
+    <tr>
+        <td>Pendaftar</td>
+        <td>Terima</td>
+        <td>Tolak</td>
+        <td>Jumlah Inbox</td>
+        <td>Terima</td>
+        <td>Tolak</td>
+        <td>Jumlah Inbox</td>
+        <td>Terima</td>
+        <td>Tolak</td>
+        <td>Revisi</td>
+        <td>Jumlah Inbox</td>
+        <td>Terima</td>
+        <td>Tolak</td>
+        <td>Revisi</td>
+    </tr>
+        {% for row in kotama %}
+    <tr>
+        <td>{{ loop.index }}</td>
+        <td>{{ row.nama_kotama }}</td>
+        <td class="combat">{{ row.jm_pendaftar }}</td>
+        <td class="jpt">{{ row.jm_pendaftar_terima }}</td>
+        <td class="jptk">{{ row.jm_pendaftar_tolak }}</td>
+        <th class="jsi">{{ row.jm_satker_inbox }}</th>
+        <td class="jst">{{ row.jm_satker_terima }}</td>
+        <td class="jstk">{{ row.jm_satker_tolak }}</td>
+        <td class="jki">{{ row.jm_kotama_inbox }}</td>
+        <th class="jkt">{{ row.jm_kotama_terima }}</th>
+        <td class="jktk">{{ row.jm_kotama_tolak }}</td>
+        <td class="jktr">0</td>
+        <th class="jpi">{{ row.jm_pusat_inbox }}</th>
+        <td class="jput">{{ row.jm_pusat_terima }}</td>
+        <td class="jputk">{{ row.jm_pusat_tolak }}</td>
+        <td class="jpur">0</td>
+    </tr>
+    {% endfor %}
+    <tr>
+        <td></td>
+        <td>Jumlah</td>
+        <td class="total-combat">{{ totaldftr }}</td>
+        <td class="tjpt">{{ jpt }}</td>
+        <td class="tjptk">{{ jptk }}</td>
+        <td class="tjsi">{{ jsi }}</td>
+        <td class="tjst">{{ jst }}</td>
+        <td class="tjstk">{{ jstk }}</td>
+        <td class="tjki">{{ jki }}</td>
+        <td class="tjkt">{{ jkt }}</td>
+        <td class="tjktk">{{ jktk }}</td>
+        <td class="tjktr">0</td>
+        <td class="tjpi">{{ jpi }}</td>
+        <td class="tjput">{{ jput }}</td>
+        <td class="tjputk">{{ jputk}}</td>
+        <td class="tjpur">0</td>
+    </tr>
+</table>  
+<br><br>
+<table class="title">
+    <tr>
+        <td style="width: 400px"></td>
+        <td align="center">
+            Jakarta, {{ tanggal }}<br/><br/>
+            Sekretariat Jendral<br/>
+            Kepala Biro Kepegawaian<br/><br/><br/><br/><br/><br/>
+            _________________________
+        </td>
+    </tr>
+</table>
+<script src="https://code.jquery.com/jquery-3.6.1.slim.min.js" integrity="sha256-w8CvhFs7iHNVUtnSP0YKEg00p9Ih13rlL9zGqvLdePA=" crossorigin="anonymous"></script>
+<script>
+
+$(document).ready(function () {
+//daftar
+    var sum = 0;
+    $('.combat').each(function() {
+        sum += parseFloat($(this).text());
+    });
+
+    $('.total-combat').text(sum);
+
+
+//diterima
+    var sum2 = 0;
+    $('.jpt').each(function() {
+        sum2 += parseFloat($(this).text());
+    });
+    {# console.log(sum) #}
+    $('.tjpt').text(sum2);
+   
+//diteolak
+    var sum3 = 0;
+    $('.jptk').each(function() {
+        sum3 += parseFloat($(this).text());
+    });
+    $('.tjptk').text(sum3);
+
+//diteolak
+    var sum4 = 0;
+    $('.jsi').each(function() {
+        sum4 += parseFloat($(this).text());
+    });
+    $('.tjsi').text(sum4);
+
+//diteolak
+    var sum5 = 0;
+    $('.jst').each(function() {
+        sum5 += parseFloat($(this).text());
+    });
+    $('.tjst').text(sum5);
+
+ var sum6 = 0;
+    $('.jstk').each(function() {
+        sum6 += parseFloat($(this).text());
+    });
+    $('.tjstk').text(sum6);
+
+ var sum7 = 0;
+    $('.jki').each(function() {
+        sum7 += parseFloat($(this).text());
+    });
+    $('.tjki').text(sum7);
+
+ var sum8 = 0;
+    $('.jkt').each(function() {
+        sum8 += parseFloat($(this).text());
+    });
+    $('.tjkt').text(sum8);
+
+ var sum9 = 0;
+    $('.jktk').each(function() {
+        sum9 += parseFloat($(this).text());
+    });
+    $('.tjktk').text(sum9);
+
+ var sum10 = 0;
+    $('.jktr').each(function() {
+        sum10 += parseFloat($(this).text());
+    });
+    $('.tjktr').text(sum10);
+
+
+
+ var sum11 = 0;
+    $('.jpi').each(function() {
+        sum11 += parseFloat($(this).text());
+    });
+    $('.tjpi').text(sum11);
+
+ var sum12 = 0;
+    $('.jput').each(function() {
+        sum12 += parseFloat($(this).text());
+    });
+    $('.tjput').text(sum12);
+
+ var sum13 = 0;
+    $('.jputk').each(function() {
+        sum13 += parseFloat($(this).text());
+    });
+    $('.tjputk').text(sum13);
+
+ var sum14 = 0;
+    $('.jpur').each(function() {
+        sum14 += parseFloat($(this).text());
+    });
+    $('.tjpur').text(sum14);
+});
+</script>

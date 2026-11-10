@@ -1,0 +1,129 @@
+{% extends "cetak.twig" %}
+{% block content %}
+    <style>
+        ol {
+            margin: 13px;
+        }
+
+        ol > li {
+            padding: 0 !important;
+            margin: 0 !important;
+        }
+    </style>
+	{% for page in data %}
+		<div class="page">
+			<table width="100%">
+				<tr>
+					<td width="100"><img src="{{ system_logo }}" height="80"></td>
+					<td>
+						<CENTER>
+							<strong class="f12 upper">
+								BERITA ACARA PELAKSANAAN<BR>
+								{{ system_tes|replace({"\n": "<BR>"})|raw }}
+							</strong>
+						</CENTER></td>
+					<td width="100"><div class="qrcode" id="qr_{{page.params.qrid}}" data-value="{{page.params.qrcode}}" style="float: right"></div></td>
+				</tr>
+			</table>
+			<table class="detail">
+				<tr>
+					<td>Provinsi</td><td>:</td><td colspan="4"><span style="width:100%;">{{ page.params.provinsi_id }} - {{ page.params.provinsi }}</span></td>
+				</tr>
+				<tr>
+					<td>Kota/Kabupaten</td><td>:</td><td colspan="4"><span style="width:100%;">{{ page.params.kota_id }} - {{ page.params.kota }}</span></td>
+				</tr>
+				<tr>
+					<td>Lokasi Ujian</td><td>:</td><td colspan="4"><span style="width:100%;">{{ page.params.nama_lokasi }}</span></td>
+				</tr>
+				<tr>
+					<td>Ruang</td><td>:</td><td><span style="width:400px;">{{ page.params.ruang_id }} - {{ page.params.ruang_nama }}</span></td>
+					<td>Sesi</td><td>:</td><td><span style="width:100px;">{{ page.params.sesi }}</span></td>
+				</tr>
+			</table>
+			<table class="datatable full" width="100%">
+				<tr style="height:30px">
+					<th rowspan="2">No.</th>
+					<th rowspan="2">Username</th>
+					<th rowspan="2">Nama Peserta<BR> </th>
+					<th colspan="8">Centang Kasus</th>
+					<th rowspan="2">Keterangan</th>
+				</tr>
+                <tr style="height:30px">
+					<th>(1)</th>
+					<th>(2)</th>
+					<th>(3)</th>
+					<th>(4)</th>
+					<th>(5)</th>
+					<th>(6)</th>
+					<th>(7)</th>
+					<th>(8)</th>
+				</tr>
+				{% for row in page.data %}
+				<tr>
+					<td width="15" align="center">{{ row.no }}</td>
+					<td width="100" align="center">{{ row.username }}</td>
+					<td width="*">{{ row.nama }}</td>
+					<td width="20">{{ row.cek_01 | raw }}</td>
+					<td width="20">{{ row.cek_02 | raw }}</td>
+					<td width="20">{{ row.cek_03 | raw }}</td>
+					<td width="20">{{ row.cek_04 | raw }}</td>
+					<td width="20">{{ row.cek_05 | raw }}</td>
+					<td width="20">{{ row.cek_06 | raw }}</td>
+					<td width="20">{{ row.cek_07 | raw }}</td>
+					<td width="20">{{ row.cek_08 | raw }}</td>
+					<td width="150">{{ row.keterangan }}</td>
+				</tr>
+				{% endfor %}
+			</table>
+			{% if page.params.isTtd %}
+            <br><br>
+            <table width="100%">
+                <tr>
+                    <td width="400">
+                        <strong>Keterangan :</strong>
+                        <ol>
+							{% for ms in master %}
+                            <li>{{ ms.nama }}</li>
+							{% endfor %}
+                        </ol>
+                    </td>
+                    <td style="padding-left: 20px;" valign="top">
+                        <table>
+                            <tr><td>Penanggung Jawab Lokasi</td><td>:</td></tr>
+                            <tr><td>Wakil Penanggung Jawab Lokasi </td><td>:</td></tr>
+                            <tr><td>Pengawas Ruangan I</td><td>:</td></tr>
+                            <tr><td>Pengawas Ruangan II</td><td>:</td></tr>
+                            <tr><td>Teknisi Laboratorium Komputer I</td><td>:</td></tr>
+                            <tr><td>Teknisi Laboratorium Komputer II</td><td>:</td></tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+			{% endif %}
+			<BR><BR><BR><BR>
+			<div class="footer">
+				<table width="100%" height="30">
+				<tr>
+					<td width="25px" style="border:1px solid black"></td>
+					<td width="5px">&nbsp;</td>
+					<td style="border:1px solid black;font-weight:bold;font-size:14px;text-align:center;">{{ system_tes }}</td>
+					<td width="5px">&nbsp;</td>
+					<td width="25px" style="border:1px solid black"></td>
+				</tr>
+				</table>
+			</div>
+		</div>
+    {% endfor %}
+    <script>
+    	$('.qrcode').each(function(){
+    		new QRCode(document.getElementById($(this).attr('id')), {
+			    text: $(this).attr('data-value'),
+			    width: 75,
+			    height: 75,
+			    colorDark : "#000000",
+			    colorLight : "#ffffff",
+			    correctLevel : QRCode.CorrectLevel.H
+			});
+    	});
+    </script>
+{% endblock %}

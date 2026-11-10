@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sistem Informasi CAT</title>
+
+    <script>var base_url = '';</script>
+
+    <link rel="icon" type="image/png" href="assets/img/logo.png">
+    <link rel="stylesheet" href="assets/css/cetak.min.css?_dc=1662000000">
+
+    <script type="text/javascript" src="vendor/jquery/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="vendor/jquery/jquery-migrate-1.4.1.min.js"></script>
+    <script type="text/javascript" src="vendor/qrcode/qrcode.min.js"></script>
+</head>
+<body>
+	<style>
+        body {
+            background: #fff;
+            padding-left: 40px;
+            padding-right: 40px;
+            padding-top: 40px;
+        }
+
+		td {
+			padding: 5px;
+            font-size: 14px;
+		}
+
+		.upper {
+			text-transform: uppercase;
+		}
+	</style>
+    <table class="kartu" width="100%">
+        <tr>
+            <td colspan="4">
+                <table width="100%" class="kartu">
+                <tr>
+                    <td style="padding: 4px" valign="top"><img src="assets/img/logo-kemhan.png" height="80"></td>
+                    <td align="center" style="font-weight:bold; padding: 4px;" valign="top">
+                        <span class="upper">Sekretariat Jenderal Kemhan RI <BR>Biro Kepegawaian </span><BR><BR>
+                        <span class="upper">PANITIA UJIAN DINAS TK.I / UPKP PNS KEMHAN</span><BR>
+                        <span class="upper">TA. 2022</span><BR><br><br>
+                        <span class="upper">KARTU PESERTA</span><BR>
+                    </td>
+                    <td style="padding: 4px;" valign="top">
+                        <div class="qrcode" id="qr_2022-0001" data-value="2022-0001"></div><BR>
+                        <div style="text-align: center">2022-0001</div>
+                    </td>
+                </tr>
+                </table><br><br>
+            </td>
+        </tr>
+        <tr>
+            <td rowspan="8" width="80" valign="top">
+                <div style="width: 4cm; border: 1px solid #ccc; text-align: center; margin-right: 10px">
+                    <img style="width: 100%" src="assets/img/men.png">
+                </div>
+            </td>
+            <td width="150" valign="top">Nama Peserta</td>
+            <td width="1" valign="top">:</td>
+            <td>Ahmad Fauzi, S.Kom</td>
+        </tr>
+        <tr><td valign="top">NIP</td><td valign="top">:</td><td valign="top">197805122003121004</td></tr>
+        <tr><td valign="top">KOTAMA || SATKER</td><td valign="top">:</td><td valign="top">Kemhan&nbsp;||&nbsp;Biro Kepegawaian</td></tr>
+                <tr><td valign="top">Golongan / Pangkat</td><td valign="top">:</td><td valign="top">Penata Muda Tk.I / III b</td></tr>
+        <tr><td valign="top">Jabatan</td><td valign="top">:</td><td valign="top">Analis Kepegawaian</td></tr>
+        <tr><td valign="top">Jenis Ujian</td><td valign="top">:</td><td valign="top">Ujian Dinas Tk.I / UPKP PNS Kemhan TA. 2022</td></tr>
+        
+        <tr><td valign="top">Nomor Peserta</td><td valign="top">:</td><td style="font-size:12px;font-weight:bold;" valign="top">2022-0001</td></tr>
+        <tr><td valign="top">Username</td><td valign="top">:</td><td style="font-size:12px;font-weight:bold;" valign="top">ahmad.fauzi</td></tr>
+                            </table>
+
+	<script>
+    	$('.qrcode').each(function(){
+    		new QRCode(document.getElementById($(this).attr('id')), {
+			    text: $(this).attr('data-value'),
+			    width: 100,
+			    height: 100,
+			    colorDark : "#000000",
+			    colorLight : "#ffffff",
+			    correctLevel : QRCode.CorrectLevel.H
+			});
+
+            $(this).find('img').css({"margin":"auto"});
+    	});
+    </script>
+</body>
+</html>

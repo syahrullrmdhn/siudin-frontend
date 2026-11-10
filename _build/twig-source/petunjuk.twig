@@ -1,0 +1,41 @@
+{% extends "master.twig" %}
+{% block content %}
+	<div class="container">
+		<div class="card card-bg" style="max-width: 700px">
+			<div class="card-body">
+				{% if system_camera == '1' %}
+				<div class="rounded mb-4 text-center">
+					<div class="webcam" id="webcam-image" username="{{ peserta.username }}" style="margin: auto; border-radius: 10px;overflow:hidden;"></div>
+				</div>
+				{% endif %}
+				<h4>Informasi Peserta</h4>
+				<form id="fmBio" name="fmBio" method="POST" action="{{base_url}}peserta/exam/mulai" class="form-custom form-ajax">
+					<div class="form-group">
+						<label for="nisn">NIP</label>
+						<p class="form-control-static">{{peserta.nip}}&nbsp;</p>
+					</div>
+					<div class="form-group">
+						<label for="nama">Nama Peserta</label>
+						<p class="form-control-static">{{peserta.nama}}&nbsp;</p>
+					</div>
+					<div class="form-group">
+						<label for="gender">Tempat Lahir</label>
+						<p class="form-control-static">{{peserta.tmp_lahir}}&nbsp;</p>
+					</div>
+					<div class="form-group">
+						<label for="lahir">Tanggal Lahir</label>
+						<p class="form-control-static">{{peserta.tgl_lahir}}&nbsp;</p>
+					</div>
+					<div class="form-group">
+						<label for="lahir">Jenis Kelamin</label>
+						<p class="form-control-static">{{peserta.gender}}&nbsp;</p>
+					</div>
+				</form>
+				<div class="row my-3">
+                    <div class="col-sm-6 py-1"><a href="{{ base_url }}peserta/exam/intro" class="btn btn-primary w-100 btn-form-ajax">Tutorial Ujian</a></div>
+                    <div class="col-sm-6 py-1"><a href="javascript:;" id="btnMulai" class="btn btn-success w-100 ml-auto">Mulai Ujian</a></div>
+                </div>
+			</div>
+		</div>
+	</div>
+{% endblock %}

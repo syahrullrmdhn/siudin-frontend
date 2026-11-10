@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+    <title>{{ system_title }}</title>
+    <link rel="icon" href="{{ system_logo }}" sizes="32x32">
+
+    <!--Vendor-->
+    <link rel="stylesheet" href="{{ base_url }}vendor/jquery/jquery-ui.min.css">
+    <link rel="stylesheet" href="{{ base_url }}vendor/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ base_url }}vendor/font-awesome-6/css/all.min.css">
+    <link rel="stylesheet" href="{{ base_url }}vendor/select2/css/select2.min.css">
+    <link rel="stylesheet" href="{{ base_url }}vendor/moment/css/daterangepicker.min.css">
+    <link rel="stylesheet" href="{{ base_url }}assets/css/tinymce.css?_dc={{ current_time }}">
+
+    <!--Assets-->
+    <link rel="stylesheet" href="{{ base_url }}assets/css/framework.min.css?_dc={{ current_time }}">
+    <link rel="stylesheet" href="{{ base_url }}assets/css/admin.min.css?_dc={{ current_time }}">
+</head>
+<body>
+    <div class="main">
+        <div class="menu">
+            <div class="menu-header">
+                <img src="{{ system_logo }}" height="70px">
+                <span>{{ system_name }}</span>
+                <span>{{ system_organization }}</span>
+                <span>{{ system_office }}</span>
+                <img src="{{ base_url }}assets/img/line.png">
+            </div>
+            <ul class="nav side-menu">
+                {% for menu in menus %}
+                    <li class="side-menu-label">{{ menu.menu }}</li>
+
+                    {% if menu.hasChild %}
+                        {% for child in menu.items %}
+                            <li>
+                                <a href="javascript:void(0)" class="js-menu" data-class="{{ child.class }}" data-url="{{ child.link }}" data-ajax="{{ child.ajax }}" data-dialog="{{ child.dialog }}">
+                                    <span class="fa {{ child.icon}} side-menu-icon"></span>
+                                    <span class="side-menu-title">{{ child.menu }}</span>
+
+                                    {% if child.hasChild %}
+                                        <span class='caret'></span>
+                                    {% endif %}
+                                </a>
+
+                                {% if child.hasChild %}
+                                    <ul class="nav sub-menu collapse">
+                                        {% for sub in child.items %}
+                                            <li>
+                                                <a href="javascript:void(0)" class="js-menu" data-class="{{ sub.class }}" data-url="{{ sub.link }}" data-ajax="{{ sub.ajax }}" data-dialog="{{ sub.dialog }}">
+                                                    <span class="side-menu-title">{{ sub.menu }}</span>
+                                                </a>
+                                            </li>
+                                        {% endfor %}
+                                    </ul>
+                                {% endif %}
+                            </li>
+                        {% endfor %}
+                    {% endif %}
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="wrapper-main">
+            <div class="header">
+                <a href="#" class="toggle-menu" id="toggle-menu">
+                    <span class="fa fa-bars side-menu-icon"></span>
+                </a>
+                <ul class="header-right">
+                    <li>
+                        <a href ="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><span class="far fa-bell"></span><span class="label label-warning chat_count">0</span></a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="javascript:void(0)" class="js-menu" id="notif_chat" data-class="Home" data-url="home" data-ajax="Y" data-dialog="N">
+                                    <span class="fa fa-comments-o"></span> Anda mendapatkan <span class="chat_count">0</span> pesan belum dibaca
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="user-menu">
+                        <a href ="#" class="dropdown-toggle button-user" data-toggle="dropdown" aria-expanded="false">
+                            <img alt="" src="{{ base_url }}api/v2/users/avatar?isAjax=true">
+                            <span class="userlogin">{{ user_login }}</span>
+                            <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <div class="photo">
+                                <img alt="" src="{{ base_url }}api/v2/users/avatar?isAjax=true" width="100%">
+                            </div>
+                            <li>
+                                <a href="javascript:void(0)" class="js-menu" data-class="PengaturanAkun" data-url="users/pengaturan" data-ajax="Y" data-dialog="Y">
+                                    <span class="fa fa-user"></span>
+                                    Pengaturan Akun
+                                </a>
+                            </li>
+                            <li><a href="javascript:void(0)" class="btn-logout"><span class="fa fa-sign-out-alt"></span> Keluar</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <div class="wrapper-content">
+                <div class="bg-breadcrumbs"></div>
+                <div class="content imat" id="content">
+                    {% block content %}
+
+                    {% endblock %}
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        var baseURL = '{{ base_url }}';
+        var uniqueID = '{{ app.key }}';
+    </script>
+
+    <script src="{{ base_url }}vendor/jquery/jquery-3.2.1.min.js"></script>
+    <script src="{{ base_url }}vendor/jquery/jquery.form.min.js"></script>
+    <script src="{{ base_url }}vendor/jquery/jquery-ui.min.js"></script>
+    <script src="{{ base_url }}vendor/jquery/jquery.slimscroll.min.js"></script>
+    <script src="{{ base_url }}vendor/select2/js/select2.min.js"></script>
+    <script src="{{ base_url }}vendor/plupload/js/plupload.full.min.js"></script>
+    <script src="{{ base_url }}vendor/bootstrap/js/bootstrap.min.js"></script>
+    <script src="{{ base_url }}vendor/tinymce/tinymce.min.js"></script>
+    <script src="{{ base_url }}vendor/tinymce/jquery.tinymce.min.js"></script>
+    <script src="{{ base_url }}vendor/chart/Chart.min.js"></script>
+    <script src="{{ base_url }}vendor/moment/js/moment.min.js"></script>
+    <script src="{{ base_url }}vendor/moment/js/daterangepicker.min.js"></script>
+    <script src="{{ base_url }}vendor/face-api/face-api.min.js"></script>
+
+    <!--Assets-->
+    <script src="{{ base_url }}user/referensi/{{ current_time }}"></script>
+    <script src="{{ base_url }}assets/js/framework.min.js?_dc={{ current_time }}"></script>
+    <script src="{{ base_url }}assets/js/admin.min.js?_dc={{ current_time }}"></script>
+
+    <div class="script" id="script">
+        {% block script %}
+
+        {% endblock %}
+    </div>
+</body>
+</html>

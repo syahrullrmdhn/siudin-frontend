@@ -1,0 +1,8 @@
+{% extends "cetak.twig" %}
+{% block content %}
+	{% for row in filename %}
+	    <div class="page" style="padding:0">
+	        <img src="{{ base_url }}{{ row }}" width="100%">
+	    </div>
+    {% endfor %}
+{% endblock %}

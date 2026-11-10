@@ -1,0 +1,327 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+    <title>Sistem Informasi CAT - Biro Kepegawaian - Kementerian Pertahanan</title>
+    <link rel="icon" href="assets/img/logo-kemhan.png" sizes="32x32">
+
+    <!--Vendor-->
+    <link rel="stylesheet" href="vendor/jquery/jquery-ui.min.css">
+    <link rel="stylesheet" href="vendor/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="vendor/font-awesome-6/css/all.min.css">
+    <link rel="stylesheet" href="vendor/select2/css/select2.min.css">
+    <link rel="stylesheet" href="vendor/moment/css/daterangepicker.min.css">
+    <link rel="stylesheet" href="assets/css/tinymce.css?_dc=1662000000">
+
+    <!--Assets-->
+    <link rel="stylesheet" href="assets/css/framework.min.css?_dc=1662000000">
+    <link rel="stylesheet" href="assets/css/admin.min.css?_dc=1662000000">
+</head>
+<body>
+    <div class="main">
+        <div class="menu">
+            <div class="menu-header">
+                <img src="assets/img/logo-kemhan.png" height="70px">
+                <span>CAT Kemhan</span>
+                <span>BIRO KEPEGAWAIAN</span>
+                <span>KEMENTERIAN PERTAHANAN RI</span>
+                <img src="assets/img/line.png">
+            </div>
+            <ul class="nav side-menu">
+                                    <li class="side-menu-label">Menu Utama</li>
+
+                                                                        <li>
+                                <a href="javascript:void(0)" class="js-menu" data-class="Home" data-url="home" data-ajax="Y" data-dialog="N">
+                                    <span class="fa fa-dashboard side-menu-icon"></span>
+                                    <span class="side-menu-title">Dashboard</span>
+
+                                                                    </a>
+
+                                                            </li>
+                                                    <li>
+                                <a href="javascript:void(0)" class="js-menu" data-class="" data-url="#" data-ajax="Y" data-dialog="N">
+                                    <span class="fa fa-solid fa-screwdriver-wrench side-menu-icon"></span>
+                                    <span class="side-menu-title">Pengaturan</span>
+
+                                                                            <span class='caret'></span>
+                                                                    </a>
+
+                                                                    <ul class="nav sub-menu collapse">
+                                                                                    <li>
+                                                <a href="javascript:void(0)" class="js-menu" data-class="PengaturanInstansi" data-url="pengaturan/instansi" data-ajax="Y" data-dialog="N">
+                                                    <span class="side-menu-title">Office Site</span>
+                                                </a>
+                                            </li>
+                                                                                    <li>
+                                                <a href="javascript:void(0)" class="js-menu" data-class="Pengaturan" data-url="pengaturan" data-ajax="Y" data-dialog="N">
+                                                    <span class="side-menu-title">Profile Site</span>
+                                                </a>
+                                            </li>
+                                                                                    <li>
+                                                <a href="javascript:void(0)" class="js-menu" data-class="Backup" data-url="backup" data-ajax="Y" data-dialog="N">
+                                                    <span class="side-menu-title">Backup Data</span>
+                                                </a>
+                                            </li>
+                                                                                    <li>
+                                                <a href="javascript:void(0)" class="js-menu" data-class="BackupRestore" data-url="backup/restore" data-ajax="Y" data-dialog="Y">
+                                                    <span class="side-menu-title">Restore Data</span>
+                                                </a>
+                                            </li>
+                                                                                    <li>
+                                                <a href="javascript:void(0)" class="js-menu" data-class="Server" data-url="server" data-ajax="Y" data-dialog="N">
+                                                    <span class="side-menu-title">Manajemen Server Daerah</span>
+                                                </a>
+                                            </li>
+                                                                                    <li>
+                                                <a href="javascript:void(0)" class="js-menu" data-class="Monitoring" data-url="monitoring" data-ajax="Y" data-dialog="N">
+                                                    <span class="side-menu-title">Monitoring Koneksi</span>
+                                                </a>
+                                            </li>
+                                                                                    <li>
+                                                <a href="javascript:void(0)" class="js-menu" data-class="SinkronisasiSoal" data-url="sinkronisasi/soal" data-ajax="Y" data-dialog="N">
+                                                    <span class="side-menu-title">Sinkronisasi Soal</span>
+                                                </a>
+                                            </li>
+                                                                                    <li>
+                                                <a href="javascript:void(0)" class="js-menu" data-class="SinkronisasiPeserta" data-url="sinkronisasi/peserta" data-ajax="Y" data-dialog="N">
+                                                    <span class="side-menu-title">Sinkronisasi Peserta</span>
+                                                </a>
+                                            </li>
+                                                                                    <li>
+                                                <a href="javascript:void(0)" class="js-menu" data-class="SinkronisasiHasil" data-url="sinkronisasi/hasil" data-ajax="Y" data-dialog="N">
+                                                    <span class="side-menu-title">Sinkronisasi Hasil Ujian</span>
+                                                </a>
+                                            </li>
+                                                                                    <li>
+                                                <a href="javascript:void(0)" class="js-menu" data-class="Update" data-url="update" data-ajax="Y" data-dialog="Y">
+                                                    <span class="side-menu-title">Update Aplikasi</span>
+                                                </a>
+                                            </li>
+                                                                            </ul>
+                                                            </li>
+                                                    <li>
+                                <a href="javascript:void(0)" class="js-menu" data-class="" data-url="#" data-ajax="Y" data-dialog="N">
+                                    <span class="fa fa-user-gear side-menu-icon"></span>
+                                    <span class="side-menu-title">User Authorization</span>
+
+                                                                            <span class='caret'></span>
+                                                                    </a>
+
+                                                                    <ul class="nav sub-menu collapse">
+                                                                                    <li>
+                                                <a href="javascript:void(0)" class="js-menu" data-class="Group" data-url="group" data-ajax="Y" data-dialog="N">
+                                                    <span class="side-menu-title">User Group</span>
+                                                </a>
+                                            </li>
+                                                                                    <li>
+                                                <a href="javascript:void(0)" class="js-menu" data-class="Menu" data-url="menu" data-ajax="Y" data-dialog="N">
+                                                    <span class="side-menu-title">Hak Akses</span>
+                                                </a>
+                                            </li>
+                                                                                    <li>
+                                                <a href="javascript:void(0)" class="js-menu" data-class="Users" data-url="users" data-ajax="Y" data-dialog="N">
+                                                    <span class="side-menu-title">Pengguna</span>
+                                                </a>
+                                            </li>
+                                                                                    <li>
+                                                <a href="javascript:void(0)" class="js-menu" data-class="PengaturanAkun" data-url="users/pengaturan" data-ajax="Y" data-dialog="Y">
+                                                    <span class="side-menu-title">Ganti Password</span>
+                                                </a>
+                                            </li>
+                                                                            </ul>
+                                                            </li>
+                                                    <li>
+                                <a href="javascript:void(0)" class="js-menu" data-class="" data-url="#" data-ajax="Y" data-dialog="N">
+                                    <span class="fa fa-table side-menu-icon"></span>
+                                    <span class="side-menu-title">Master Data</span>
+
+                                                                            <span class='caret'></span>
+                                                                    </a>
+
+                                                                    <ul class="nav sub-menu collapse">
+                                                                                    <li>
+                                                <a href="javascript:void(0)" class="js-menu" data-class="Biodata" data-url="biodata" data-ajax="Y" data-dialog="N">
+                                                    <span class="side-menu-title">Peserta</span>
+                                                </a>
+                                            </li>
+                                                                            </ul>
+                                                            </li>
+                                                    <li>
+                                <a href="javascript:void(0)" class="js-menu" data-class="" data-url="#" data-ajax="Y" data-dialog="N">
+                                    <span class="fa fa-computer side-menu-icon"></span>
+                                    <span class="side-menu-title">Manajemen Ujian</span>
+
+                                                                            <span class='caret'></span>
+                                                                    </a>
+
+                                                                    <ul class="nav sub-menu collapse">
+                                                                                    <li>
+                                                <a href="javascript:void(0)" class="js-menu" data-class="Kartu" data-url="cetak/kartu" data-ajax="Y" data-dialog="Y">
+                                                    <span class="side-menu-title">Kartu Peserta</span>
+                                                </a>
+                                            </li>
+                                                                                    <li>
+                                                <a href="javascript:void(0)" class="js-menu" data-class="AbsenCetak" data-url="absen/cetak" data-ajax="Y" data-dialog="Y">
+                                                    <span class="side-menu-title">Daftar Hadir</span>
+                                                </a>
+                                            </li>
+                                                                                    <li>
+                                                <a href="javascript:void(0)" class="js-menu" data-class="Ruang" data-url="ruang" data-ajax="Y" data-dialog="N">
+                                                    <span class="side-menu-title">Ruang dan Pengawas</span>
+                                                </a>
+                                            </li>
+                                                                                    <li>
+                                                <a href="javascript:void(0)" class="js-menu" data-class="Kehadiran" data-url="kehadiran" data-ajax="Y" data-dialog="N">
+                                                    <span class="side-menu-title">Aktivasi Peserta Ujian</span>
+                                                </a>
+                                            </li>
+                                                                                    <li>
+                                                <a href="javascript:void(0)" class="js-menu" data-class="Token" data-url="token" data-ajax="Y" data-dialog="N">
+                                                    <span class="side-menu-title">Token Mulai Ujian</span>
+                                                </a>
+                                            </li>
+                                                                                    <li>
+                                                <a href="javascript:void(0)" class="js-menu" data-class="Peserta" data-url="peserta" data-ajax="Y" data-dialog="N">
+                                                    <span class="side-menu-title">Status Peserta Ujian</span>
+                                                </a>
+                                            </li>
+                                                                                    <li>
+                                                <a href="javascript:void(0)" class="js-menu" data-class="Pengawasan" data-url="peserta/pengawasan" data-ajax="Y" data-dialog="N">
+                                                    <span class="side-menu-title">Proktoring / Pengawasan</span>
+                                                </a>
+                                            </li>
+                                                                            </ul>
+                                                            </li>
+                                                    <li>
+                                <a href="javascript:void(0)" class="js-menu" data-class="" data-url="#" data-ajax="Y" data-dialog="N">
+                                    <span class="fa fa-chart-pie side-menu-icon"></span>
+                                    <span class="side-menu-title">Pengolahan dan Analisis</span>
+
+                                                                            <span class='caret'></span>
+                                                                    </a>
+
+                                                                    <ul class="nav sub-menu collapse">
+                                                                                    <li>
+                                                <a href="javascript:void(0)" class="js-menu" data-class="AnalisisViewer" data-url="analisis/viewer" data-ajax="N" data-dialog="N">
+                                                    <span class="side-menu-title">Livescore</span>
+                                                </a>
+                                            </li>
+                                                                                    <li>
+                                                <a href="javascript:void(0)" class="js-menu" data-class="AnalisisNilai" data-url="analisis/nilai" data-ajax="Y" data-dialog="N">
+                                                    <span class="side-menu-title">Daftar Nilai</span>
+                                                </a>
+                                            </li>
+                                                                                    <li>
+                                                <a href="javascript:void(0)" class="js-menu" data-class="AnalisisSerap" data-url="analisis/serap" data-ajax="Y" data-dialog="N">
+                                                    <span class="side-menu-title">Analisis Butir Soal</span>
+                                                </a>
+                                            </li>
+                                                                                    <li>
+                                                <a href="javascript:void(0)" class="js-menu" data-class="AnalisisLog" data-url="analisis/log" data-ajax="Y" data-dialog="N">
+                                                    <span class="side-menu-title">Log Aktivitas Ujian</span>
+                                                </a>
+                                            </li>
+                                                                                    <li>
+                                                <a href="javascript:void(0)" class="js-menu" data-class="RekapUo" data-url="rekap/uo" data-ajax="Y" data-dialog="N">
+                                                    <span class="side-menu-title">Rekap per UO / Kotama</span>
+                                                </a>
+                                            </li>
+                                                                                    <li>
+                                                <a href="javascript:void(0)" class="js-menu" data-class="RekapLokasi" data-url="rekap/lokasi" data-ajax="Y" data-dialog="N">
+                                                    <span class="side-menu-title">Rekap per Lokasi Ujian</span>
+                                                </a>
+                                            </li>
+                                                                                    <li>
+                                                <a href="javascript:void(0)" class="js-menu" data-class="RekapJenis" data-url="rekap/jenis" data-ajax="Y" data-dialog="N">
+                                                    <span class="side-menu-title">Rekap per Jenis Ujian</span>
+                                                </a>
+                                            </li>
+                                                                            </ul>
+                                                            </li>
+                                                                        </ul>
+        </div>
+        <div class="wrapper-main">
+            <div class="header">
+                <a href="#" class="toggle-menu" id="toggle-menu">
+                    <span class="fa fa-bars side-menu-icon"></span>
+                </a>
+                <ul class="header-right">
+                    <li>
+                        <a href ="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><span class="far fa-bell"></span><span class="label label-warning chat_count">0</span></a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="javascript:void(0)" class="js-menu" id="notif_chat" data-class="Home" data-url="home" data-ajax="Y" data-dialog="N">
+                                    <span class="fa fa-comments-o"></span> Anda mendapatkan <span class="chat_count">0</span> pesan belum dibaca
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="user-menu">
+                        <a href ="#" class="dropdown-toggle button-user" data-toggle="dropdown" aria-expanded="false">
+                            <img alt="" src="assets/img/avatar-1.png">
+                            <span class="userlogin">Administrator</span>
+                            <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <div class="photo">
+                                <img alt="" src="assets/img/avatar-1.png" width="100%">
+                            </div>
+                            <li>
+                                <a href="javascript:void(0)" class="js-menu" data-class="PengaturanAkun" data-url="users/pengaturan" data-ajax="Y" data-dialog="Y">
+                                    <span class="fa fa-user"></span>
+                                    Pengaturan Akun
+                                </a>
+                            </li>
+                            <li><a href="javascript:void(0)" class="btn-logout"><span class="fa fa-sign-out-alt"></span> Keluar</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <div class="wrapper-content">
+                <div class="bg-breadcrumbs"></div>
+                <div class="content imat" id="content">
+                        <div class="panel panel-default">
+        <div class="panel-heading">
+            Ini Header
+        </div>
+        <div class="panel-body">
+            Ini Content
+        </div>
+    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        var baseURL = '';
+        var uniqueID = 'STATIC-UI-KIT-NO-LIVE-KEY';
+    </script>
+
+    <script src="vendor/jquery/jquery-3.2.1.min.js"></script>
+    <script src="vendor/jquery/jquery.form.min.js"></script>
+    <script src="vendor/jquery/jquery-ui.min.js"></script>
+    <script src="vendor/jquery/jquery.slimscroll.min.js"></script>
+    <script src="vendor/select2/js/select2.min.js"></script>
+    <script src="vendor/plupload/js/plupload.full.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+    <script src="vendor/tinymce/tinymce.min.js"></script>
+    <script src="vendor/tinymce/jquery.tinymce.min.js"></script>
+    <script src="vendor/chart/Chart.min.js"></script>
+    <script src="vendor/moment/js/moment.min.js"></script>
+    <script src="vendor/moment/js/daterangepicker.min.js"></script>
+    <script src="vendor/face-api/face-api.min.js"></script>
+
+    <!--Assets-->
+    <script src="assets/js/referensi.static.js"></script>
+    <script src="assets/js/framework.min.js?_dc=1662000000"></script>
+    <script src="assets/js/admin.min.js?_dc=1662000000"></script>
+
+    <div class="script" id="script">
+            <script>
+    	// Kalau ada javascript simpan disini
+    </script>
+    </div>
+</body>
+</html>

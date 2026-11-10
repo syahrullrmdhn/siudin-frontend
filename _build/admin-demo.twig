@@ -1,0 +1,90 @@
+{% extends "admin.twig" %}
+
+{% block content %}
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <i class="fa fa-dashboard"></i>&nbsp;&nbsp;&nbsp;Dashboard
+    </div>
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-lg-3 col-md-6 col-sm-6">
+                <div class="imat-metrics bg-aqua">
+                    <span class="imat-metrics-icon fa fa-users"></span>
+                    <span class="imat-metrics-text">Peserta</span>
+                    <span class="imat-metrics-value">1.120</span>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-6">
+                <div class="imat-metrics bg-green">
+                    <span class="imat-metrics-icon fa fa-desktop"></span>
+                    <span class="imat-metrics-text">Ruang</span>
+                    <span class="imat-metrics-value">24</span>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-6">
+                <div class="imat-metrics bg-yellow">
+                    <span class="imat-metrics-icon far fa-clock"></span>
+                    <span class="imat-metrics-text">Sesi</span>
+                    <span class="imat-metrics-value">6</span>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-6">
+                <div class="imat-metrics bg-red">
+                    <span class="imat-metrics-icon fa fa-user-graduate"></span>
+                    <span class="imat-metrics-text">Pengawas</span>
+                    <span class="imat-metrics-value">48</span>
+                </div>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="panel panel-default">
+                    <div class="panel-heading"><i class="far fa-bullhorn"></i>&nbsp;&nbsp;&nbsp;Pengumuman</div>
+                    <div class="panel-body" style="padding:10px; min-height:240px">
+                        <ul class="timeline">
+                            <li>
+                                <div class="timeline-item">
+                                    <span class="time"><i class="far fa-clock"></i> 08:00</span>
+                                    <h3 class="timeline-header">Gladi bersih dilaksanakan H-1 sebelum ujian</h3>
+                                    <div class="timeline-body">
+                                        Seluruh peserta wajib mengikuti gladi bersih sesuai jadwal yang telah ditetapkan.
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="timeline-item">
+                                    <span class="time"><i class="far fa-clock"></i> 07:30</span>
+                                    <h3 class="timeline-header">Kartu peserta dapat diunduh</h3>
+                                    <div class="timeline-body">
+                                        Kartu peserta dapat dicetak melalui menu Manajemen Ujian &rsaquo; Kartu Peserta.
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="panel panel-default">
+                    <div class="panel-heading"><i class="fa fa-download"></i>&nbsp;&nbsp;&nbsp;Download</div>
+                    <div class="panel-body" style="min-height:240px">
+                        <ul class="download">
+                            <li>
+                                <a href="javascript:;" class="download-folder"><i class="fa fa-folder"></i> Panduan</a>
+                                <ul>
+                                    <li><a href="javascript:;" class="download-file"><i class="far fa-file-alt"></i> Panduan Peserta.pdf</a></li>
+                                    <li><a href="javascript:;" class="download-file"><i class="far fa-file-alt"></i> Panduan Pengawas.pdf</a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="javascript:;" class="download-file"><i class="far fa-file-alt"></i> Jadwal Ujian.pdf</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

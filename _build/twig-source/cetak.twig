@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ app.name }}</title>
+
+    <script>var base_url = '{{ base_url }}';</script>
+
+    <link rel="icon" type="image/png" href="{{ base_url }}assets/img/logo.png">
+    <link rel="stylesheet" href="{{ base_url }}assets/css/cetak.min.css?_dc={{ current_time }}">
+
+    <script type="text/javascript" src="{{ base_url }}vendor/jquery/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="{{ base_url }}vendor/jquery/jquery-migrate-1.4.1.min.js"></script>
+    <script type="text/javascript" src="{{ base_url }}vendor/qrcode/qrcode.min.js"></script>
+</head>
+<body>
+{% block content %}
+
+{% endblock %}
+</body>
+</html>

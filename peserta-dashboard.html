@@ -1,0 +1,435 @@
+<!doctype html>
+<html lang="en" class="fullscreen-bg">
+
+<head>
+    <title>Sistem Informasi CAT - Biro Kepegawaian - Kementerian Pertahanan</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    
+	<link rel="icon" href="assets/img/logo-kemhan.png">
+    <link rel="stylesheet" href="vendor/bootstrap-v4/css/bootstrap.min.css">
+    <link rel="stylesheet" href="vendor/font-awesome-5/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/roboto.min.css?_dc=1662000000">
+    <link rel="stylesheet" href="assets/css/tinymce.css?_dc=1662000000">
+    <link rel="stylesheet" href="assets/css/custom.min.css?_dc=1662000000">
+</head>
+
+<body>
+    <div class="wrapper">
+		<div class="bg"></div>
+        <div class="header mx-5 d-flex">
+            <div class="logo logo-master">
+                <img src="assets/img/logo-kemhan.png">
+                <div>
+                    <h2>BIRO KEPEGAWAIAN</h2>
+                    <h2>KEMENTERIAN PERTAHANAN RI</h2>
+                    <h6>CAT Kemhan</h6>
+                </div>
+            </div>
+            <div class="user">
+                <div class="user-text">
+                    						<h6>Administrator</h6>
+						<a href="javascript:;" id="btnLogout" class="btn btn-sm btn-white logout btnLogout">Logout</a>
+					                </div>
+                <div class="user-icon">
+                    <span class="fa fa-user-graduate"></span>
+                </div>
+            </div>
+        </div>
+        	<div class="container">
+		<div class="card card-bg">
+			<div class="card-body">
+				<div class="row">
+					<div class="col-sm-3">
+												<div class="photo"><img src="assets/img/men.png" tes=""></div>
+												<div class="photo-id">2022-0001</div>
+                    	<div class="photo-name">Ahmad Fauzi, S.Kom</div>
+						<br>
+						<div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+							<a class="nav-link active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true"><span class="fa fa-home"></span> Home</a>
+							<a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false"><span class="fa fa-user"></span> Profile</a>
+														<a class="nav-link" id="v-pills-berkas-tab" data-toggle="pill" href="#v-pills-berkas" role="tab" aria-controls="v-pills-berkas" aria-selected="false"><span class="fa fa-upload"></span> Upload Berkas</a>
+							<a class="nav-link" id="v-pills-lokasi-tab" data-toggle="pill" href="#v-pills-lokasi" role="tab" aria-controls="v-pills-lokasi" aria-selected="false"><span class="fa fa-home"></span> Pemilihan Lokasi Ujian</a>
+														<a class="nav-link" id="v-pills-jadwal-tab" data-toggle="pill" href="#v-pills-jadwal" role="tab" aria-controls="v-pills-jadwal" aria-selected="false"><span class="fa fa-calendar"></span> Jadwal Ujian</a>
+							<a class="nav-link" id="v-pills-kartu-tab" data-toggle="pill" href="#v-pills-kartu" role="tab" aria-controls="v-pills-kartu" aria-selected="false"><span class="fa fa-id-card"></span> Kartu Peserta</a>
+														<a class="nav-link" id="v-pills-sertifikat-tab" data-toggle="pill" href="#v-pills-sertifikat" role="tab" aria-controls="v-pills-sertifikat" aria-selected="false"><span class="fa fa-file-pdf"></span> Sertifikat</a>
+													</div>
+					</div>
+					<div class="col-sm-9">
+						<div class="tab-content" id="v-pills-tabContent">
+							<div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
+								<h6 class="mb-4"><strong><span class="fa fa-comments mr-2"></span> Selamat Datang Ahmad Fauzi, S.Kom</strong></h6>
+																																					<div class="card mt-4 card-nilai">
+											<div class="card-body">
+												<div class="skor">
+													<div class="progress" data-percentage="">
+														<span class="progress-left">
+															<span class="progress-bar"></span>
+														</span>
+														<span class="progress-right">
+															<span class="progress-bar"></span>
+														</span>
+														<div class="progress-value">
+															<div>
+																
+															</div>
+														</div>
+													</div>
+												</div>
+												<div class="skor-keterangan">
+													<span></span>
+													<small></small>
+												</div>
+											</div>
+										</div>
+																				<div class="card mt-4 card-nilai">
+											<div class="card-body">
+												<div class="skor">
+													<div class="progress" data-percentage="">
+														<span class="progress-left">
+															<span class="progress-bar"></span>
+														</span>
+														<span class="progress-right">
+															<span class="progress-bar"></span>
+														</span>
+														<div class="progress-value">
+															<div>
+																
+															</div>
+														</div>
+													</div>
+												</div>
+												<div class="skor-keterangan">
+													<span>Tes Kompetensi Manajerial</span>
+													<small></small>
+												</div>
+											</div>
+										</div>
+																				<div class="card mt-4 card-nilai">
+											<div class="card-body">
+												<div class="skor">
+													<div class="progress" data-percentage="">
+														<span class="progress-left">
+															<span class="progress-bar"></span>
+														</span>
+														<span class="progress-right">
+															<span class="progress-bar"></span>
+														</span>
+														<div class="progress-value">
+															<div>
+																
+															</div>
+														</div>
+													</div>
+												</div>
+												<div class="skor-keterangan">
+													<span>Tes Kompetensi Sosial Kultural</span>
+													<small></small>
+												</div>
+											</div>
+										</div>
+																				<div class="card mt-4 card-nilai">
+											<div class="card-body">
+												<div class="skor">
+													<div class="progress" data-percentage="">
+														<span class="progress-left">
+															<span class="progress-bar"></span>
+														</span>
+														<span class="progress-right">
+															<span class="progress-bar"></span>
+														</span>
+														<div class="progress-value">
+															<div>
+																
+															</div>
+														</div>
+													</div>
+												</div>
+												<div class="skor-keterangan">
+													<span>Tes Wawasan Kebangsaan</span>
+													<small></small>
+												</div>
+											</div>
+										</div>
+																				<div class="card mt-4 card-nilai">
+											<div class="card-body">
+												<div class="skor">
+													<div class="progress" data-percentage="">
+														<span class="progress-left">
+															<span class="progress-bar"></span>
+														</span>
+														<span class="progress-right">
+															<span class="progress-bar"></span>
+														</span>
+														<div class="progress-value">
+															<div>
+																
+															</div>
+														</div>
+													</div>
+												</div>
+												<div class="skor-keterangan">
+													<span></span>
+													<small></small>
+												</div>
+											</div>
+										</div>
+																				<div class="card mt-4 card-nilai">
+											<div class="card-body">
+												<div class="skor">
+													<div class="progress" data-percentage="">
+														<span class="progress-left">
+															<span class="progress-bar"></span>
+														</span>
+														<span class="progress-right">
+															<span class="progress-bar"></span>
+														</span>
+														<div class="progress-value">
+															<div>
+																
+															</div>
+														</div>
+													</div>
+												</div>
+												<div class="skor-keterangan">
+													<span>Tes Verbal</span>
+													<small></small>
+												</div>
+											</div>
+										</div>
+																				<div class="card mt-4 card-nilai">
+											<div class="card-body">
+												<div class="skor">
+													<div class="progress" data-percentage="">
+														<span class="progress-left">
+															<span class="progress-bar"></span>
+														</span>
+														<span class="progress-right">
+															<span class="progress-bar"></span>
+														</span>
+														<div class="progress-value">
+															<div>
+																
+															</div>
+														</div>
+													</div>
+												</div>
+												<div class="skor-keterangan">
+													<span>Tes Numerik</span>
+													<small></small>
+												</div>
+											</div>
+										</div>
+																				<div class="card mt-4 card-nilai">
+											<div class="card-body">
+												<div class="skor">
+													<div class="progress" data-percentage="">
+														<span class="progress-left">
+															<span class="progress-bar"></span>
+														</span>
+														<span class="progress-right">
+															<span class="progress-bar"></span>
+														</span>
+														<div class="progress-value">
+															<div>
+																
+															</div>
+														</div>
+													</div>
+												</div>
+												<div class="skor-keterangan">
+													<span>Tes Figural</span>
+													<small></small>
+												</div>
+											</div>
+										</div>
+																																		
+							</div>
+							<div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
+								<h6 class="mb-4"><strong><span class="fa fa-user mr-2"></span> Profil Peserta</strong></h6>
+								<form id="fmBio" name="fmBio" method="POST" action="peserta/exam/mulai" class="form-custom form-ajax">
+									<div class="form-group">
+										<label for="nisn">NIP</label>
+										<p class="form-control-static">197805122003121004&nbsp;</p>
+									</div>
+									<div class="form-group">
+										<label for="nama">Nama Peserta</label>
+										<p class="form-control-static">Ahmad Fauzi, S.Kom&nbsp;</p>
+									</div>
+									<div class="form-group">
+										<label for="gender">Tempat Lahir</label>
+										<p class="form-control-static">Jakarta&nbsp;</p>
+									</div>
+									<div class="form-group">
+										<label for="lahir">Tanggal Lahir</label>
+										<p class="form-control-static">1978-05-12&nbsp;</p>
+									</div>
+									<div class="form-group">
+										<label for="lahir">Jenis Kelamin</label>
+										<p class="form-control-static">Laki-laki&nbsp;</p>
+									</div>
+									<div class="form-group">
+										<label for="kotama">Kotama/UO</label>
+										<p class="form-control-static">Kemhan&nbsp;</p>
+									</div>
+									<div class="form-group">
+										<label for="satker">Satker/Balakpus</label>
+										<p class="form-control-static">Biro Kepegawaian&nbsp;</p>
+									</div>
+									<div class="form-group">
+										<label for="golongan">Golongan / Pangkat</label>
+										<p class="form-control-static">Penata Muda Tk.I / III b&nbsp;</p>
+									</div>
+									<div class="form-group">
+										<label for="jabatan">Jabatan</label>
+										<p class="form-control-static">Analis Kepegawaian&nbsp;</p>
+										
+									</div>
+								</form>
+							</div>
+							<div class="tab-pane fade" id="v-pills-berkas" role="tabpanel" aria-labelledby="v-pills-berkas-tab">
+								<h6 class="mb-4"><strong><span class="fa fa-file-pdf mr-2"></span> Upload Berkas</strong></h6>
+																	<form id="fmUpload" name="fmUpload" method="POST" action="peserta/registrasi/upload" class="form-custom form-ajax" enctype="multipart/form-data">
+										<div class="form-group">
+																					<table class="table table-bordered">
+												<thead>
+													<tr>
+														<th scope="col">No</th>
+														<th scope="col">Keterangan</th>
+														<th scope="col">File</th>
+														<th scope="col" width="300px;">Status</th>
+													</tr>
+												</thead>
+												<tbody>	
+													<tr>
+														<th scope="row">1</th>
+														<td>Ijazah & Transkrip</td>
+														<td>
+																																																		<label>ijazah_transkrip.pdf</label>
+																																														</td>
+														<td>
+																																																<label>Data Lolos Verifikasi</label>
+																																													</td>
+													</tr>
+													<tr>
+														<th scope="row">2</th>
+														<td>Golongan / Pangkat Terakhir</td>
+														<td>
+																																																		<label>sk_pangkat_terakhir.pdf</label>
+																																														</td>
+														<td>
+																																																<label>Data Lolos Verifikasi</label>
+																																													</td>
+													</tr>
+													
+													<tr>
+														<th scope="row">3</th>
+														<td>CV/Riwayat Hidup</td>
+														<td>
+																																																		<label>cv_riwayat_hidup.pdf</label>
+																																														</td>
+														<td>
+																																																<label>Data Sedang di Verifikasi</label>
+																																													</td>
+													</tr>
+													<tr>
+														<th scope="row">4</th>
+														<td>Foto Background Biru</td>
+														<td>
+																															<input type="file" class="form-control form-control-sm" name="berkas_05" id="berkas_05" aria-describedby="berkasHelp" accept=".jpg, .png, .jpeg, .gif, .bmp, .tif, .tiff|image/*" required/>
+																<small>
+																	<p style="color:red; font-family: Arial, Helvetica, sans-serif;">
+																		Foto tanpa kacamata, tanpa tutup kepala dan ukuran 6 x 9
+																	</p>
+																</small>
+																													</td>
+														<td>
+																															<label>Data Belum Di Upload</label>
+																													</td>
+													</tr>
+													<tr>
+														<th scope="row">5</th>
+														<td>Ijazah Diklat 1</td>
+														<td>
+																															<input type="file" class="form-control form-control-sm" name="berkas_06_1" id="berkas_06_1" aria-describedby="berkasHelp" accept="application/pdf" required/>
+																													</td>
+														<td>
+																															<label>Data Belum Di Upload</label>
+																													</td>
+													</tr>
+													<tr>
+														<th scope="row">6</th>
+														<td>Ijazah Diklat 2</td>
+														<td>
+																															<input type="file" class="form-control form-control-sm" name="berkas_06_2" id="berkas_06_2" aria-describedby="berkasHelp" accept="application/pdf" required/>
+																													</td>
+														<td>
+																															<label>Data Belum Di Upload</label>
+																													</td>
+													</tr>
+												</tbody>
+											</table>
+																				</div>
+										<small id="berkasHelp" class="form-text text-muted">
+											<p style="color:red; font-family: Arial, Helvetica, sans-serif;">
+												Berkas yang diupload dalam bentuk pdf maksimal 3Mb/File
+											</p>
+										</small>
+																					<button type="button" class="btn btn-primary btn-sm btn-form-ajax"><span class="fa fa-upload"></span> Upload</button>
+																			</form>
+															</div>
+							<div class="tab-pane fade" id="v-pills-lokasi" role="tabpanel" aria-labelledby="v-pills-lokasi-tab">
+								<h6 class="mb-4"><strong><span class="fa fa-home mr-2"></span> Pemilihan Lokasi Ujian</strong></h6>
+								<div>
+									<form id="fmUpload" name="fmUpload" method="POST" action="peserta/registrasi/lokasi" class="form-custom form-ajax" enctype="multipart/form-data">
+									<div class="form-group">
+										<label for="lokasi">Lokasi Ujian</label>
+										<select id="lokasi" name="lokasi" class="form-control">
+											<option value="">Pilih Lokasi Ujian</option>
+																							<option value="3171" >Kantor Kemhan - Gedung A Lantai 3</option>
+																							<option value="3172" >Kantor Kemhan - Gedung B Lantai 2</option>
+																							<option value="3273" >Kodam III/Siliwangi - Bandung</option>
+																					</select>
+									</div>
+									<button type="button" class="btn btn-primary btn-sm btn-form-ajax"><span class="fa fa-save"></span> Simpan</button>
+									</form>
+								</div>
+							</div>
+							<div class="tab-pane fade" id="v-pills-jadwal" role="tabpanel" aria-labelledby="v-pills-jadwal-tab">
+								<h6 class="mb-4"><strong><span class="fa fa-calendar mr-2"></span> Jadwal Ujian</strong></h6>
+																	<div class="alert alert-primary">Jadwal Ujian dapat dilihat setelah lolos Verifikasi Pusat</div>
+															</div>
+							<div class="tab-pane fade" id="v-pills-kartu" role="tabpanel" aria-labelledby="v-pills-kartu-tab">
+								<h6 class="mb-4"><strong><span class="fa fa-id-card mr-2"></span> Kartu Peserta</strong></h6>
+																	<div class="alert alert-primary">
+										Kartu Peserta dapat dilihat setelah lolos Verifikasi Pusat
+									</div>
+															</div>
+							<div class="tab-pane fade" id="v-pills-sertifikat" role="tabpanel" aria-labelledby="v-pills-sertifikat-tab">
+								<h6 class="mb-4"><strong><span class="fa fa-file-pdf mr-2"></span> Sertifikat</strong></h6>
+																<div class="alert alert-primary">Sertifikat akan muncul setelah ujian selesai</div>
+															</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+    </div>
+	
+    
+    <script>
+	    var baseURL = '';
+	    var uniqueID = 'STATIC-UI-KIT-NO-LIVE-KEY';
+	</script>
+
+	<script src="vendor/jquery/jquery-3.2.1.min.js"></script>
+	<script src="vendor/jquery/jquery.form.min.js"></script>
+	<script src="vendor/bootstrap-v4/js/bootstrap.min.js"></script>
+    <script src="vendor/webcam/webcam.min.js"></script>
+	<script src="assets/js/custom.min.js?_dc=1662000000"></script>
+	
+    </body>
+
+</html>

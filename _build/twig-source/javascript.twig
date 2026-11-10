@@ -1,0 +1,8 @@
+{% extends "admin.twig" %}
+
+{% block script %}
+    <script>
+    	var JS_PARAMS = {{ params | raw }};
+    	{{ script | raw }}
+    </script>
+{% endblock %}

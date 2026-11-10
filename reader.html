@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+		<title>Sistem Informasi CAT - Biro Kepegawaian - Kementerian Pertahanan</title>
+
+		<link rel="icon" href="assets/img/logo-kemhan.png" sizes="32x32"/>
+		<link rel="stylesheet" href="vendor/bootstrap-4/css/bootstrap.min.css"/>
+		<link rel="stylesheet" href="vendor/sweetalert2/sweetalert2.min.css">
+
+		<link href="assets/css/front.min.css" rel="stylesheet"/>
+	</head>
+	<body>
+		<div class="container-fluid">
+			<div class="row min-vh-100 d-flex justify-content-center align-items-center">
+				<div class="col-sm-9 py-3 mw-900">
+					<div class="card">
+						<div class="card-body p-0">
+							<div class="row h-100 no-gutters">
+								<div class="col-md-5 text-white text-center bg-card-gradient">
+									<div class="position-relative p-4 pt-md-5 pb-md-7">
+										<div class="bg-holder bg-auth-card-shape"></div>
+										<div class="z-index-1 position-relative">
+											<a class="text-white mb-4 text-sans-serif font-weight-extra-bold fs-4 d-inline-block" href="index.html">
+												<img src="assets/img/logo-kemhan.png" width="80">
+											</a>
+											<p class="text-white text-center opacity-75">
+												<span class="f-12">BIRO KEPEGAWAIAN</span><br>
+												<span class="f-12">KEMENTERIAN PERTAHANAN RI</span><br>
+												<span class="f-10">CAT KEMHAN</span>
+											</p>
+										</div>
+									</div>
+									<div class="mt-3 mb-4 mt-md-4 mb-md-5">
+										<p class="pt-3">Sudah Punya Akun ?<br><a class="btn btn-outline-light mt-2 px-4" href="index.html">Login</a>
+										</p>
+									</div>
+								</div>
+								<div class="col-md-7 d-flex flex-center">
+									<div class="p-3 flex-grow-1">
+										<div style="width: 500px" id="reader"></div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script>
+			var baseURL = '';
+		</script>
+
+		<script src="vendor/jquery/jquery-3.2.1.min.js"></script>
+		<script src="vendor/jquery/jquery-migrate-1.4.1.min.js"></script>
+		<script src="vendor/jquery/jquery.form.min.js"></script>
+		<script src="vendor/bootstrap-4/js/bootstrap.min.js"></script>
+		<script src="vendor/bootstrap-4/js/popper.min.js"></script>
+		<script src="vendor/sweetalert2/sweetalert2.min.js"></script>
+		<script src="vendor/qrcode/html5-qrcode.min.js"></script>
+
+        <script>
+            var send = [];
+
+            function onScanSuccess(decodedText, decodedResult) {
+                console.log(`Scan result: ${decodedText}`, decodedResult);
+
+                if(jQuery.inArray(decodedText, send) !== -1) {
+
+                } else {
+                    $.ajax({
+                        url: baseURL + 'api/v1/readerSave',
+                        method: 'POST',
+                        dataType: 'json',
+                        data: { username: decodedText },
+                        global: false,
+                        success: function(a) {
+                            send.push(decodedText);
+                            Swal.fire('Informasi', a.msg, 'success');
+                        }
+                    });
+                }
+            }
+
+            var html5QrcodeScanner = new Html5QrcodeScanner("reader", { fps: 10, qrbox: 250 });
+            html5QrcodeScanner.render(onScanSuccess);
+        </script>
+	</body>
+</html>

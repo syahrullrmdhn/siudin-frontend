@@ -1,0 +1,789 @@
+{% extends "master.twig" %}
+{% block content %}
+	<div class="container">
+		<div class="card card-bg">
+			<div class="card-body">
+				<div class="row">
+					<div class="col-sm-3">
+						{% if (system_camera == '1' and false) %}
+						<div class="rounded mb-4 text-center">
+							<div class="webcam" id="webcam-image" username="{{ peserta.username }}" style="margin: auto; border-radius: 10px;overflow:hidden;"></div>
+						</div>
+						{% else %}
+						<div class="photo"><img src="{% if foto %}{{ foto }}{% else %}{{ base_url }}assets/img/men.png{% endif %}" tes="{{foto_file}}"></div>
+						{% endif %}
+						<div class="photo-id">{{ peserta.nopes }}</div>
+                    	<div class="photo-name">{{ peserta.nama }}</div>
+						<br>
+						<div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+							<a class="nav-link active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true"><span class="fa fa-home"></span> Home</a>
+							<a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false"><span class="fa fa-user"></span> Profile</a>
+							{% if not local_server %}
+							<a class="nav-link" id="v-pills-berkas-tab" data-toggle="pill" href="#v-pills-berkas" role="tab" aria-controls="v-pills-berkas" aria-selected="false"><span class="fa fa-upload"></span> Upload Berkas</a>
+							<a class="nav-link" id="v-pills-lokasi-tab" data-toggle="pill" href="#v-pills-lokasi" role="tab" aria-controls="v-pills-lokasi" aria-selected="false"><span class="fa fa-home"></span> Pemilihan Lokasi Ujian</a>
+							{% endif %}
+							<a class="nav-link" id="v-pills-jadwal-tab" data-toggle="pill" href="#v-pills-jadwal" role="tab" aria-controls="v-pills-jadwal" aria-selected="false"><span class="fa fa-calendar"></span> Jadwal Ujian</a>
+							<a class="nav-link" id="v-pills-kartu-tab" data-toggle="pill" href="#v-pills-kartu" role="tab" aria-controls="v-pills-kartu" aria-selected="false"><span class="fa fa-id-card"></span> Kartu Peserta</a>
+							{% if not local_server %}
+							<a class="nav-link" id="v-pills-sertifikat-tab" data-toggle="pill" href="#v-pills-sertifikat" role="tab" aria-controls="v-pills-sertifikat" aria-selected="false"><span class="fa fa-file-pdf"></span> Sertifikat</a>
+							{% endif %}
+						</div>
+					</div>
+					<div class="col-sm-9">
+						<div class="tab-content" id="v-pills-tabContent">
+							<div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
+								<h6 class="mb-4"><strong><span class="fa fa-comments mr-2"></span> Selamat Datang {{ peserta.nama }}</strong></h6>
+								{% if validasi.diterima %}
+									{% if tes|length > 0 %}
+										{% for row in tes %}
+										<div class="card mt-4 card-nilai">
+											<div class="card-body">
+												<div class="skor">
+													<div class="progress" data-percentage="{{ row.persen }}">
+														<span class="progress-left">
+															<span class="progress-bar"></span>
+														</span>
+														<span class="progress-right">
+															<span class="progress-bar"></span>
+														</span>
+														<div class="progress-value">
+															<div>
+																{{ row.benar }}
+															</div>
+														</div>
+													</div>
+												</div>
+												<div class="skor-keterangan">
+													<span>{{ row.nama_tes }}</span>
+													<small>{{ row.tanggal }}</small>
+												</div>
+											</div>
+										</div>
+										{% endfor %}
+								{% else %}
+									<div class="alert alert-primary">Peserta {{ peserta.nopes }} belum melaksanakan ujian, jadwal ujian bisa dilihat di menu Jadwal Ujian</div>
+								{% endif %}
+								{# {% elseif validasi.ditolak %}
+								<div class="alert alert-danger">Mohon maaf, Peserta Ujian tidak lolos verifikasi</div> #}
+								{% elseif validasi.gagalBerkas %}
+								<div class="alert alert-danger">Mohon maaf, Peserta Ujian tidak lolos verifikasi Berkas</div>
+								{% elseif validasi.gagalKotama %}
+								<div class="alert alert-danger">Mohon maaf, Peserta Ujian tidak lolos verifikasi Kotama</div>
+								{% elseif validasi.gagalSatker %}
+								<div class="alert alert-danger">Mohon maaf, Peserta Ujian tidak lolos verifikasi Satker</div>
+								{% elseif validasi.berkas %}
+								<div class="alert alert-primary">Peserta Ujian Data Anda masih dalam tahap verifikasi Kotama dan Satker, silahkan cek secara berkala</div>
+								{% elseif validasi.lulus_satker%}
+								<div class="alert alert-primary">Peserta Ujian Data Anda masih dalam tahap verifikasi Satker, silahkan cek secara berkala</div>
+								{% elseif validasi.kotama%}
+								<div class="alert alert-primary">Peserta Ujian Data Anda masih dalam tahap verifikasi Pusat, silahkan cek secara berkala</div>
+								{% elseif validasi.lulus_pusat%}
+								<div class="alert alert-primary">Selamat Peserta lolos verifikasi, chek secara berkala untuk jadwal ujian</div>
+								{% endif %}
+
+							</div>
+							<div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
+								<h6 class="mb-4"><strong><span class="fa fa-user mr-2"></span> Profil Peserta</strong></h6>
+								<form id="fmBio" name="fmBio" method="POST" action="{{base_url}}peserta/exam/mulai" class="form-custom form-ajax">
+									<div class="form-group">
+										<label for="nisn">NIP</label>
+										<p class="form-control-static">{{peserta.nip}}&nbsp;</p>
+									</div>
+									<div class="form-group">
+										<label for="nama">Nama Peserta</label>
+										<p class="form-control-static">{{peserta.nama}}&nbsp;</p>
+									</div>
+									<div class="form-group">
+										<label for="gender">Tempat Lahir</label>
+										<p class="form-control-static">{{peserta.tmp_lahir}}&nbsp;</p>
+									</div>
+									<div class="form-group">
+										<label for="lahir">Tanggal Lahir</label>
+										<p class="form-control-static">{{peserta.tgl_lahir}}&nbsp;</p>
+									</div>
+									<div class="form-group">
+										<label for="lahir">Jenis Kelamin</label>
+										<p class="form-control-static">{{peserta.gender}}&nbsp;</p>
+									</div>
+									<div class="form-group">
+										<label for="kotama">Kotama/UO</label>
+										<p class="form-control-static">{{peserta.nama_kotama}}&nbsp;</p>
+									</div>
+									<div class="form-group">
+										<label for="satker">Satker/Balakpus</label>
+										<p class="form-control-static">{{peserta.nama_ou}}&nbsp;</p>
+									</div>
+									<div class="form-group">
+										<label for="golongan">Golongan / Pangkat</label>
+										<p class="form-control-static">{{peserta.pangkat}}&nbsp;</p>
+									</div>
+									<div class="form-group">
+										<label for="jabatan">Jabatan</label>
+										<p class="form-control-static">{{peserta.jabatan}}&nbsp;</p>
+										
+									</div>
+								</form>
+							</div>
+							<div class="tab-pane fade" id="v-pills-berkas" role="tabpanel" aria-labelledby="v-pills-berkas-tab">
+								<h6 class="mb-4"><strong><span class="fa fa-file-pdf mr-2"></span> Upload Berkas</strong></h6>
+								{% if validasi.berkas %}
+									<div class="alert alert-success">Selamat, Anda sudah lolos verifikasi Berkas</div>
+									{% elseif validasi.eligable %}
+									<form id="fmUpload" name="fmUpload" method="POST" action="{{base_url}}peserta/registrasi/upload" class="form-custom form-ajax" enctype="multipart/form-data">
+										<div class="form-group">
+										{% if peserta.kegiatan_id == 240001 %}
+											<table class="table table-bordered">
+												<thead>
+													<tr>
+														<th scope="col">No</th>
+														<th scope="col">Keterangan</th>
+														<th scope="col">File</th>
+														<th scope="col" width="300px;">Status</th>
+													</tr>
+												</thead>
+												<tbody>	
+													<tr>
+														<th scope="row">1</th>
+														<td>Ijazah & Transkrip</td>
+														<td>
+															{% if registrasi.berkas_01 != null %}
+																	{% if registrasi.st_berkas_01 == 0 %}
+																		<label>{{registrasi.berkas_01}}</label>
+																	{% elseif registrasi.st_berkas_01 == 1 %}
+																		<label>{{registrasi.berkas_01}}</label>
+																	{% elseif registrasi.st_berkas_01 == 2 %}
+																		<input type="file" class="form-control form-control-sm" name="berkas_01" id="berkas_01" aria-describedby="berkasHelp" accept="application/pdf" required>
+																	{% elseif registrasi.st_berkas_01 == NULL %}
+																		<input type="file" class="form-control form-control-sm" name="berkas_01" id="berkas_01" aria-describedby="berkasHelp" accept="application/pdf" required>
+																	{% endif %}
+															{% else %}
+																<input type="file" class="form-control form-control-sm" name="berkas_01" id="berkas_01" aria-describedby="berkasHelp" accept="application/pdf" required>
+															{% endif %}
+														</td>
+														<td>
+															{% if registrasi.berkas_01 != null %}
+																{% if registrasi.st_berkas_01 == 0 %}
+																	<label>Data Sedang di Verifikasi</label>
+																{% elseif registrasi.st_berkas_01 == 1 %}
+																	<label>Data Lolos Verifikasi</label>
+																{% elseif registrasi.st_berkas_01 == 2 %}
+																	<label>Data Gagal Verifikasi</label>
+																	<br><label style="color:red;">Keterangan :{{registrasi.rj_berkas_01}}</label>
+																{% endif %}
+															{% elseif (registrasi.berkas_01 == null) %}
+																<label>Data Belum Di Upload</label>
+															{% endif %}
+														</td>
+													</tr>
+													<tr>
+														<th scope="row">2</th>
+														<td>Golongan / Pangkat Terakhir</td>
+														<td>
+															{% if registrasi.berkas_02 != null %}
+																	{% if registrasi.st_berkas_02 == 0 %}
+																		<label>{{registrasi.berkas_02}}</label>
+																	{% elseif registrasi.st_berkas_02 == 1 %}
+																		<label>{{registrasi.berkas_02}}</label>
+																	{% elseif registrasi.st_berkas_02 == 2 %}
+																		<input type="file" class="form-control form-control-sm" name="berkas_02" id="berkas_02" aria-describedby="berkasHelp" accept="application/pdf" required>
+																	{% elseif registrasi.st_berkas_02 == NULL %}
+																		<input type="file" class="form-control form-control-sm" name="berkas_02" id="berkas_02" aria-describedby="berkasHelp" accept="application/pdf" required>
+																	{% endif %}
+															{% else %}
+																<input type="file" class="form-control form-control-sm" name="berkas_02" id="berkas_02" aria-describedby="berkasHelp" accept="application/pdf" required>
+															{% endif %}
+														</td>
+														<td>
+															{% if registrasi.berkas_02 != null %}
+																{% if registrasi.st_berkas_02 == 0 %}
+																	<label>Data Sedang di Verifikasi</label>
+																{% elseif registrasi.st_berkas_02 == 1 %}
+																	<label>Data Lolos Verifikasi</label>
+																{% elseif registrasi.st_berkas_02 == 2 %}
+																	<label>Data Gagal Verifikasi</label><br>
+																	<label style="color:red;">Keterangan :{{registrasi.rj_berkas_02}}</label>
+																{% elseif registrasi.st_berkas_02 == NULL %}
+																	<label>Data Belum Di Upload</label>
+																{% endif %}
+															{% elseif (registrasi.berkas_02 == null) %}
+																<label>Data Belum Di Upload</label>
+															{% endif %}
+														</td>
+													</tr>
+													
+													<tr>
+														<th scope="row">3</th>
+														<td>CV/Riwayat Hidup</td>
+														<td>
+															{% if registrasi.berkas_04 != null %}
+																	{% if registrasi.st_berkas_04 == 0 %}
+																		<label>{{registrasi.berkas_04}}</label>
+																	{% elseif registrasi.st_berkas_04 == 1 %}
+																		<label>{{registrasi.berkas_04}}</label>
+																	{% elseif registrasi.st_berkas_04 == 2 %}
+																		<input type="file" class="form-control form-control-sm" name="berkas_04" id="berkas_04" aria-describedby="berkasHelp" accept="application/pdf" required>
+																	{% elseif registrasi.st_berkas_04 == NULL %}
+																		<input type="file" class="form-control form-control-sm" name="berkas_04" id="berkas_04" aria-describedby="berkasHelp" accept="application/pdf" required>
+																		<small>
+																			<p style="color:red; font-family: Arial, Helvetica, sans-serif;">
+																				Data sesuai SIMPEG
+																			</p>
+																		</small>
+																	{% endif %}
+															{% else %}
+																<input type="file" class="form-control form-control-sm" name="berkas_04" id="berkas_04" aria-describedby="berkasHelp" accept="application/pdf" required>
+																<small>
+																	<p style="color:red; font-family: Arial, Helvetica, sans-serif;
+																	">Data sesuai SIMPEG
+																</p>
+																</small>
+															{% endif %}
+														</td>
+														<td>
+															{% if registrasi.berkas_04 != null %}
+																{% if registrasi.st_berkas_04 == 0 %}
+																	<label>Data Sedang di Verifikasi</label>
+																{% elseif registrasi.st_berkas_04 == 1 %}
+																	<label>Data Lolos Verifikasi</label>
+																{% elseif registrasi.st_berkas_04 == 2 %}
+																	<label>Data Gagal Verifikasi</label><br>
+																	<label style="color:red;">Keterangan :{{registrasi.rj_berkas_04}}</label>
+																{% elseif registrasi.st_berkas_04 == NULL %}
+																	<label>Data Belum Di Upload</label>
+																{% endif %}
+															{% elseif (registrasi.berkas_04 == null) %}
+																<label>Data Belum Di Upload</label>
+															{% endif %}
+														</td>
+													</tr>
+													<tr>
+														<th scope="row">4</th>
+														<td>Foto Background Biru</td>
+														<td>
+															{% if registrasi.berkas_05 != null %}
+																	{% if registrasi.st_berkas_05 == 0 %}
+																		<label>{{registrasi.berkas_05}}</label>
+																	{% elseif registrasi.st_berkas_05 == 1 %}
+																		<label>{{registrasi.berkas_05}}</label>
+																	{% elseif registrasi.st_berkas_05 == 2 %}
+																		<input type="file" class="form-control form-control-sm" name="berkas_05" id="berkas_05" aria-describedby="berkasHelp" accept=".jpg, .png, .jpeg, .gif, .bmp, .tif, .tiff|image/*" required>
+																	{% elseif registrasi.st_berkas_05 == NULL %}
+																		<input type="file" class="form-control form-control-sm" name="berkas_05" id="berkas_05" aria-describedby="berkasHelp" accept=".jpg, .png, .jpeg, .gif, .bmp, .tif, .tiff|image/*" require>
+																		<small>
+																			<p style="color:red; font-family: Arial, Helvetica, sans-serif;">
+																				Foto tanpa kacamata, tanpa tutup kepala dan ukuran 6 x 9
+																			</p>
+																		</small>
+																	{% endif %}
+															{% else %}
+																<input type="file" class="form-control form-control-sm" name="berkas_05" id="berkas_05" aria-describedby="berkasHelp" accept=".jpg, .png, .jpeg, .gif, .bmp, .tif, .tiff|image/*" required/>
+																<small>
+																	<p style="color:red; font-family: Arial, Helvetica, sans-serif;">
+																		Foto tanpa kacamata, tanpa tutup kepala dan ukuran 6 x 9
+																	</p>
+																</small>
+															{% endif %}
+														</td>
+														<td>
+															{% if registrasi.berkas_05 != null %}
+																{% if registrasi.st_berkas_05 == 0 %}
+																	<label>Data Sedang di Verifikasi</label>
+																{% elseif registrasi.st_berkas_05 == 1 %}
+																	<label>Data Lolos Verifikasi</label>
+																{% elseif registrasi.st_berkas_05 == 2 %}
+																	<label>Data Gagal Verifikasi</label><br>
+																	<label style="color:red;">Keterangan :{{registrasi.rj_berkas_05}}</label>
+																{% elseif registrasi.st_berkas_05 == NULL %}
+																	<label>Data Belum Di Upload</label>
+																{% endif %}
+															{% elseif (registrasi.berkas_05 == null) %}
+																<label>Data Belum Di Upload</label>
+															{% endif %}
+														</td>
+													</tr>
+													<tr>
+														<th scope="row">5</th>
+														<td>Ijazah Diklat 1</td>
+														<td>
+															{% if registrasi.berkas_06_1 != null %}
+																	{% if registrasi.st_berkas_06_1 == 0 %}
+																			<label>{{registrasi.berkas_06_1}}</label>
+																	{% elseif registrasi.st_berkas_06_1 == 1 %}
+																			<label>{{registrasi.berkas_06_1}}</label>
+																	{% elseif registrasi.st_berkas_06_1 == 2 %}
+																			<input type="file" class="form-control form-control-sm" name="berkas_06_1" id="berkas_06_1" aria-describedby="berkasHelp" accept="application/pdf" required/>
+																	{% elseif registrasi.st_berkas_06_1 == NULL %}
+																			<input type="file" class="form-control form-control-sm" name="berkas_06_1" id="berkas_06_1" aria-describedby="berkasHelp" accept="application/pdf" required>
+																	{% endif %}
+															{% else %}
+																<input type="file" class="form-control form-control-sm" name="berkas_06_1" id="berkas_06_1" aria-describedby="berkasHelp" accept="application/pdf" required/>
+															{% endif %}
+														</td>
+														<td>
+															{% if registrasi.berkas_06_1 != null %}
+																{% if registrasi.st_berkas_06_1 == 0 %}
+																	<label>Data Sedang di Verifikasi</label>
+																{% elseif registrasi.st_berkas_06_1 == 1 %}
+																	<label>Data Lolos Verifikasi</label>
+																{% elseif registrasi.st_berkas_06_1 == 2 %}
+																	<label>Data Gagal Verifikasi </label><br>
+																	<label style="color:red;">Keterangan :{{registrasi.rj_berkas_06_1}}</label>
+																{% elseif registrasi.st_berkas_06_1 == NULL %}
+																	<label>Data Belum Di Upload</label>
+																{% endif %}
+															{% elseif (registrasi.berkas_06_1 == null) %}
+																<label>Data Belum Di Upload</label>
+															{% endif %}
+														</td>
+													</tr>
+													<tr>
+														<th scope="row">6</th>
+														<td>Ijazah Diklat 2</td>
+														<td>
+															{% if registrasi.berkas_06_2 != null %}
+																	{% if registrasi.st_berkas_06_2 == 0 %}
+																			<label>{{registrasi.berkas_06_2}}</label>
+																	{% elseif registrasi.st_berkas_06_2 == 1 %}
+																			<label>{{registrasi.berkas_06_2}}</label>
+																	{% elseif registrasi.st_berkas_06_2 == 2 %}
+																			<input type="file" class="form-control form-control-sm" name="berkas_06_2" id="berkas_06_2" aria-describedby="berkasHelp" accept="application/pdf" required/>
+																	{% elseif registrasi.st_berkas_06_2 == NULL %}
+																			<input type="file" class="form-control form-control-sm" name="berkas_06_2" id="berkas_06_2" aria-describedby="berkasHelp" accept="application/pdf" required>
+																	{% endif %}
+															{% else %}
+																<input type="file" class="form-control form-control-sm" name="berkas_06_2" id="berkas_06_2" aria-describedby="berkasHelp" accept="application/pdf" required/>
+															{% endif %}
+														</td>
+														<td>
+															{% if registrasi.berkas_06_2 != null %}
+																{% if registrasi.st_berkas_06_2 == 0 %}
+																	<label>Data Sedang di Verifikasi</label>
+																{% elseif registrasi.st_berkas_06_2 == 1 %}
+																	<label>Data Lolos Verifikasi</label>
+																{% elseif registrasi.st_berkas_06_2 == 2 %}
+																	<label>Data Gagal Verifikasi</label><br>
+																	<label style="color:red;">Keterangan :{{registrasi.rj_berkas_06_2}}</label>
+																{% elseif registrasi.st_berkas_06_2 == NULL %}
+																	<label>Data Belum Di Upload</label>
+																{% endif %}
+															{% elseif (registrasi.berkas_06_2 == null) %}
+																<label>Data Belum Di Upload</label>
+															{% endif %}
+														</td>
+													</tr>
+												</tbody>
+											</table>
+										{% elseif peserta.kegiatan_id == 240002 %}
+											<table class="table table-bordered">
+												<thead>
+													<tr>
+														<th scope="col">No</th>
+														<th scope="col">Keterangan</th>
+														<th scope="col">File</th>
+														<th scope="col">Status</th>
+													</tr>
+												</thead>
+												<tbody>
+													<tr>
+														<th scope="row">1</th>
+														<td>Ijazah & Transkrip</td>
+														<td>
+															{% if registrasi.berkas_01 != null %}
+																	{% if registrasi.st_berkas_01 == 0 %}
+																		<label>{{registrasi.berkas_01}}</label>
+																	{% elseif registrasi.st_berkas_01 == 1 %}
+																		<label>{{registrasi.berkas_01}}</label>
+																	{% elseif registrasi.st_berkas_01 == 2 %}
+																		<input type="file" class="form-control form-control-sm" name="berkas_01" id="berkas_01" aria-describedby="berkasHelp" accept="application/pdf" required>
+																	{% elseif registrasi.st_berkas_01 == NULL %}
+																		<input type="file" class="form-control form-control-sm" name="berkas_01" id="berkas_01" aria-describedby="berkasHelp" accept="application/pdf" required>
+																	{% endif %}
+															{% else %}
+																<input type="file" class="form-control form-control-sm" name="berkas_01" id="berkas_01" aria-describedby="berkasHelp" accept="application/pdf" required>
+															{% endif %}
+														</td>
+														<td>
+															{% if registrasi.berkas_01 != null %}
+																{% if registrasi.st_berkas_01 == 0 %}
+																	<label>Data Sedang di Verifikasi</label>
+																{% elseif registrasi.st_berkas_01 == 1 %}
+																	<label>Data Lolos Verifikasi</label>
+																{% elseif registrasi.st_berkas_01 == 2 %}
+																	<label>Data Gagal Verifikasi</label><br>
+																	<label style="color:red;">Keterangan :{{registrasi.rj_berkas_01}}</label>
+																{% endif %}
+															{% elseif (registrasi.berkas_01 == null) %}
+																<label>Data Belum Di Upload</label>
+															{% endif %}
+														</td>
+													</tr>
+													<tr>
+														<th scope="row">2</th>
+														<td>Pangkat / Golongan Terakhir</td>
+														<td>
+															{% if registrasi.berkas_02 != null %}
+																	{% if registrasi.st_berkas_02 == 0 %}
+																		<label>{{registrasi.berkas_02}}</label>
+																	{% elseif registrasi.st_berkas_02 == 1 %}
+																		<label>{{registrasi.berkas_02}}</label>
+																	{% elseif registrasi.st_berkas_02 == 2 %}
+																		<input type="file" class="form-control form-control-sm" name="berkas_02" id="berkas_02" aria-describedby="berkasHelp" accept="application/pdf" required>
+																	{% elseif registrasi.st_berkas_02 == NULL %}
+																		<input type="file" class="form-control form-control-sm" name="berkas_02" id="berkas_02" aria-describedby="berkasHelp" accept="application/pdf" required>
+																	{% endif %}
+															{% else %}
+																<input type="file" class="form-control form-control-sm" name="berkas_02" id="berkas_02" aria-describedby="berkasHelp" accept="application/pdf" required>
+															{% endif %}
+														</td>
+														<td>
+															{% if registrasi.berkas_02 != null %}
+																{% if registrasi.st_berkas_02 == 0 %}
+																	<label>Data Sedang di Verifikasi</label>
+																{% elseif registrasi.st_berkas_02 == 1 %}
+																	<label>Data Lolos Verifikasi</label>
+																{% elseif registrasi.st_berkas_02 == 2 %}
+																	<label>Data Gagal Verifikasi</label><br>
+																	<label style="color:red;">Keterangan :{{registrasi.rj_berkas_02}}</label>
+																{% elseif registrasi.st_berkas_02 == NULL %}
+																	<label>Data Belum Di Upload</label>
+																{% endif %}
+															{% elseif (registrasi.berkas_02 == null) %}
+																<label>Data Belum Di Upload</label>
+															{% endif %}
+														</td>
+													</tr>
+													<tr>
+														<th scope="row">3</th>
+														<td>CV/Riwayat Hidup</td>
+														<td>
+															{% if registrasi.berkas_04 != null %}
+																	{% if registrasi.st_berkas_04 == 0 %}
+																		<label>{{registrasi.berkas_04}}</label>
+																	{% elseif registrasi.st_berkas_04 == 1 %}
+																		<label>{{registrasi.berkas_04}}</label>
+																	{% elseif registrasi.st_berkas_04 == 2 %}
+																		<input type="file" class="form-control form-control-sm" name="berkas_04" id="berkas_04" aria-describedby="berkasHelp" accept="application/pdf" required>
+																		<small>
+																			<p style="color:red; font-family: Arial, Helvetica, sans-serif;">Data sesuai SIMPEG
+																		</p>
+																		</small>
+																	{% elseif registrasi.st_berkas_04 == NULL %}
+																		<input type="file" class="form-control form-control-sm" name="berkas_04" id="berkas_04" aria-describedby="berkasHelp" accept="application/pdf" required>
+																		<small>
+																			<p style="color:red; font-family: Arial, Helvetica, sans-serif;">Data sesuai SIMPEG
+																		</p>
+																		</small>
+																	{% endif %}
+															{% else %}
+																<input type="file" class="form-control form-control-sm" name="berkas_04" id="berkas_04" aria-describedby="berkasHelp" accept="application/pdf" required>
+																<small>
+																	<p style="color:red; font-family: Arial, Helvetica, sans-serif;
+																	">Data sesuai SIMPEG
+																</p>
+																</small>
+															{% endif %}
+														</td>
+														<td>
+															{% if registrasi.berkas_04 != null %}
+																{% if registrasi.st_berkas_04 == 0 %}
+																	<label>Data Sedang di Verifikasi</label>
+																{% elseif registrasi.st_berkas_04 == 1 %}
+																	<label>Data Lolos Verifikasi</label>
+																{% elseif registrasi.st_berkas_04 == 2 %}
+																	<label>Data Gagal Verifikasi</label><br>
+																	<label style="color:red;">Keterangan :{{registrasi.rj_berkas_04}}</label>
+																{% elseif registrasi.st_berkas_04 == NULL %}
+																	<label>Data Belum Di Upload</label>
+																{% endif %}
+															{% elseif (registrasi.berkas_04 == null) %}
+																<label>Data Belum Di Upload</label>
+															{% endif %}
+														</td>
+													</tr>
+													<tr>
+														<th scope="row">4</th>
+														<td>Foto Background Biru</td>
+														<td>
+															{% if registrasi.berkas_05 != null %}
+																	{% if registrasi.st_berkas_05 == 0 %}
+																		<label>{{registrasi.berkas_05}}</label>
+																	{% elseif registrasi.st_berkas_05 == 1 %}
+																		<label>{{registrasi.berkas_05}}</label>
+																	{% elseif registrasi.st_berkas_05 == 2 %}
+																		<input type="file" class="form-control form-control-sm" name="berkas_05" id="berkas_05" aria-describedby="berkasHelp" accept=".jpg, .png, .jpeg, .gif, .bmp, .tif, .tiff|image/*" required>
+																	{% elseif registrasi.st_berkas_05 == NULL %}
+																		<input type="file" class="form-control form-control-sm" name="berkas_05" id="berkas_05" aria-describedby="berkasHelp" accept=".jpg, .png, .jpeg, .gif, .bmp, .tif, .tiff|image/*" require>
+																		<small id="berkasHelp" class="form-text text-muted" style="color:red; font-family: Arial, Helvetica, sans-serif;">
+																			Foto tanpa kacamata, tanpa tutup kepala dan ukuran 6 x 9
+																		</small>
+																	{% endif %}
+															{% else %}
+																<input type="file" class="form-control form-control-sm" name="berkas_05" id="berkas_05" aria-describedby="berkasHelp" accept=".jpg, .png, .jpeg, .gif, .bmp, .tif, .tiff|image/*" required/>
+																<small id="berkasHelp" class="form-text text-muted">
+																	<p style="color:red; font-family: Arial, Helvetica, sans-serif;">
+																		Foto tanpa kacamata, tanpa tutup kepala dan ukuran 6 x 9
+																	</p>
+																</small>
+															{% endif %}
+														</td>
+														<td>
+															{% if registrasi.berkas_05 != null %}
+																{% if registrasi.st_berkas_05 == 0 %}
+																	<label>Data Sedang di Verifikasi</label>
+																{% elseif registrasi.st_berkas_05 == 1 %}
+																	<label>Data Lolos Verifikasi</label>
+																{% elseif registrasi.st_berkas_05 == 2 %}
+																	<label>Data Gagal Verifikasi</label><br>
+																	<label style="color:red;">Keterangan :{{registrasi.rj_berkas_05}}</label>
+																{% elseif registrasi.st_berkas_05 == NULL %}
+																	<label>Data Belum Di Upload</label>
+																{% endif %}
+															{% elseif (registrasi.berkas_05 == null) %}
+																<label>Data Belum Di Upload</label>
+															{% endif %}
+														</td>
+													</tr>
+													<tr>
+														<th scope="row">5</th>
+														<td>Ijazah Diklat 1</td>
+														<td>
+															{% if registrasi.berkas_06_1 != null %}
+																	{% if registrasi.st_berkas_06_1 == 0 %}
+																			<label>{{registrasi.berkas_06_1}}</label>
+																	{% elseif registrasi.st_berkas_06_1 == 1 %}
+																			<label>{{registrasi.berkas_06_1}}</label>
+																	{% elseif registrasi.st_berkas_06_1 == 2 %}
+																			<input type="file" class="form-control form-control-sm" name="berkas_06_1" id="berkas_06_1" aria-describedby="berkasHelp" accept="application/pdf" required/>
+																	{% elseif registrasi.st_berkas_06_1 == NULL %}
+																			<input type="file" class="form-control form-control-sm" name="berkas_06_1" id="berkas_06_1" aria-describedby="berkasHelp" accept="application/pdf" required>
+																	{% endif %}
+															{% else %}
+																<input type="file" class="form-control form-control-sm" name="berkas_06_1" id="berkas_06_1" aria-describedby="berkasHelp" accept="application/pdf" required/>
+															{% endif %}
+														</td>
+														<td>
+															{% if registrasi.berkas_06_1 != null %}
+																{% if registrasi.st_berkas_06_1 == 0 %}
+																	<label>Data Sedang di Verifikasi</label>
+																{% elseif registrasi.st_berkas_06_1 == 1 %}
+																	<label>Data Lolos Verifikasi</label>
+																{% elseif registrasi.st_berkas_06_1 == 2 %}
+																	<label>Data Gagal Verifikasi </label><br>
+																	<label style="color:red;">Keterangan :{{registrasi.rj_berkas_06_1}}</label>
+																{% elseif registrasi.st_berkas_06_1 == NULL %}
+																	<label>Data Belum Di Upload</label>
+																{% endif %}
+															{% elseif (registrasi.berkas_06_1 == null) %}
+																<label>Data Belum Di Upload</label>
+															{% endif %}
+														</td>
+													</tr>
+													<tr>
+														<th scope="row">6</th>
+														<td>Ijazah Diklat 2</td>
+														<td>
+															{% if registrasi.berkas_06_2 != null %}
+																	{% if registrasi.st_berkas_06_2 == 0 %}
+																			<label>{{registrasi.berkas_06_2}}</label>
+																	{% elseif registrasi.st_berkas_06_2 == 1 %}
+																			<label>{{registrasi.berkas_06_2}}</label>
+																	{% elseif registrasi.st_berkas_06_2 == 2 %}
+																			<input type="file" class="form-control form-control-sm" name="berkas_06_2" id="berkas_06_2" aria-describedby="berkasHelp" accept="application/pdf" required/>
+																	{% elseif registrasi.st_berkas_06_2 == NULL %}
+																			<input type="file" class="form-control form-control-sm" name="berkas_06_2" id="berkas_06_2" aria-describedby="berkasHelp" accept="application/pdf" required>
+																	{% endif %}
+															{% else %}
+																<input type="file" class="form-control form-control-sm" name="berkas_06_2" id="berkas_06_2" aria-describedby="berkasHelp" accept="application/pdf" required/>
+															{% endif %}
+														</td>
+														<td>
+															{% if registrasi.berkas_06_2 != null %}
+																{% if registrasi.st_berkas_06_2 == 0 %}
+																	<label>Data Sedang di Verifikasi</label>
+																{% elseif registrasi.st_berkas_06_2 == 1 %}
+																	<label>Data Lolos Verifikasi</label>
+																{% elseif registrasi.st_berkas_06_2 == 2 %}
+																	<label>Data Gagal Verifikasi</label><br>
+																	<label style="color:red;">Keterangan :{{registrasi.rj_berkas_06_2}}</label>
+																{% elseif registrasi.st_berkas_06_2 == NULL %}
+																	<label>Data Belum Di Upload</label>
+																{% endif %}
+															{% elseif (registrasi.berkas_06_2 == null) %}
+																<label>Data Belum Di Upload</label>
+															{% endif %}
+														</td>
+													</tr>
+													<tr>
+														<th scope="row">7</th>
+														<td>Surat izin Kuliah</td>
+														<td>
+															{% if registrasi.berkas_07 != null %}
+																	{% if registrasi.st_berkas_07 == 0 %}
+																		<label>{{registrasi.berkas_07}}</label>
+																	{% elseif registrasi.st_berkas_07 == 1 %}
+																		<label>{{registrasi.berkas_07}}</label>
+																	{% elseif registrasi.st_berkas_07 == 2 %}
+																		<input type="file" class="form-control form-control-sm" name="berkas_07" id="berkas_07" aria-describedby="berkasHelp" accept="application/pdf" required/>
+																	{% elseif registrasi.st_berkas_07 == NULL %}
+																		<input type="file" class="form-control form-control-sm" name="berkas_07" id="berkas_07" aria-describedby="berkasHelp" accept="application/pdf" required>
+																	{% endif %}
+															{% else %}
+																<input type="file" class="form-control form-control-sm" name="berkas_07" id="berkas_07" aria-describedby="berkasHelp" accept="application/pdf" required/>
+															{% endif %}
+														</td>
+														<td>
+															{% if registrasi.berkas_07 != null %}
+																{% if registrasi.st_berkas_07 == 0 %}
+																	<label>Data Sedang di Verifikasi</label>
+																{% elseif registrasi.st_berkas_07 == 1 %}
+																	<label>Data Lolos Verifikasi</label>
+																{% elseif registrasi.st_berkas_07 == 2 %}
+																	<label>Data Gagal Verifikasi</label><br>
+																	<label style="color:red;">Keterangan :{{registrasi.rj_berkas_07}}</label>
+																{% elseif registrasi.st_berkas_07 == NULL %}
+																	<label>Data Belum Di Upload</label>
+																{% endif %}
+															{% elseif (registrasi.berkas_07 == null) %}
+																<label>Data Belum Di Upload</label>
+															{% endif %}
+														</td>
+													</tr>
+													<tr>
+														<th scope="row">8</th>
+														<td>Akreditasi kampus</td>
+														<td>
+															{% if registrasi.berkas_08 != null %}
+																	{% if registrasi.st_berkas_08 == 0 %}
+																		<label>{{registrasi.berkas_08}}</label>
+																	{% elseif registrasi.st_berkas_08 == 1 %}
+																		<label>{{registrasi.berkas_08}}</label>
+																	{% elseif registrasi.st_berkas_08 == 2 %}
+																		<input type="file" class="form-control form-control-sm" name="berkas_08" id="berkas_08" aria-describedby="berkasHelp" accept="application/pdf" required/>
+																	{% elseif registrasi.st_berkas_08 == NULL %}
+																		<input type="file" class="form-control form-control-sm" name="berkas_08" id="berkas_08" aria-describedby="berkasHelp" accept="application/pdf" required>
+																	{% endif %}
+															{% else %}
+																<input type="file" class="form-control form-control-sm" name="berkas_08" id="berkas_08" aria-describedby="berkasHelp" accept="application/pdf" required/>
+															{% endif %}
+														</td>
+														<td>
+															{% if registrasi.berkas_08 != null %}
+																{% if registrasi.st_berkas_08 == 0 %}
+																	<label>Data Sedang di Verifikasi</label>
+																{% elseif registrasi.st_berkas_08 == 1 %}
+																	<label>Data Lolos Verifikasi</label>
+																{% elseif registrasi.st_berkas_08 == 2 %}
+																	<label>Data Gagal Verifikasi</label><br>
+																	<label style="color:red;">Keterangan :{{registrasi.rj_berkas_08}}</label>
+																{% elseif registrasi.st_berkas_08 == NULL %}
+																	<label>Data Belum Di Upload</label>
+																{% endif %}
+															{% elseif (registrasi.berkas_08 == null) %}
+																<label>Data Belum Di Upload</label>
+															{% endif %}
+														</td>
+													</tr>
+												</tbody>
+											</table>
+										{% endif %}
+										</div>
+										<small id="berkasHelp" class="form-text text-muted">
+											<p style="color:red; font-family: Arial, Helvetica, sans-serif;">
+												Berkas yang diupload dalam bentuk pdf maksimal 3Mb/File
+											</p>
+										</small>
+										{% if registrasi.lulus_dokumen == null %}
+											<button type="button" class="btn btn-primary btn-sm btn-form-ajax"><span class="fa fa-upload"></span> Upload</button>
+										{% endif %}
+									</form>
+								{% else %}
+									<div class="alert alert-danger">Mohon maaf, Peserta Ujian tidak lolos verifikasi Berkas</div>
+								{% endif %}
+							</div>
+							<div class="tab-pane fade" id="v-pills-lokasi" role="tabpanel" aria-labelledby="v-pills-lokasi-tab">
+								<h6 class="mb-4"><strong><span class="fa fa-home mr-2"></span> Pemilihan Lokasi Ujian</strong></h6>
+								<div>
+									<form id="fmUpload" name="fmUpload" method="POST" action="{{base_url}}peserta/registrasi/lokasi" class="form-custom form-ajax" enctype="multipart/form-data">
+									<div class="form-group">
+										<label for="lokasi">Lokasi Ujian</label>
+										<select id="lokasi" name="lokasi" class="form-control">
+											<option value="">Pilih Lokasi Ujian</option>
+											{% for row in lokasi %}
+												<option value="{{ row.lokasi_id }}" {% if row.lokasi_id == peserta.lokasi_id %}selected{% endif %}>{{ row.nama_lokasi }}</option>
+											{% endfor %}
+										</select>
+									</div>
+									<button type="button" class="btn btn-primary btn-sm btn-form-ajax"><span class="fa fa-save"></span> Simpan</button>
+									</form>
+								</div>
+							</div>
+							<div class="tab-pane fade" id="v-pills-jadwal" role="tabpanel" aria-labelledby="v-pills-jadwal-tab">
+								<h6 class="mb-4"><strong><span class="fa fa-calendar mr-2"></span> Jadwal Ujian</strong></h6>
+								{% if validasi.lulusPusat %}
+									<table class="table table-bordered table-dashed table-stripped">
+										<thead>
+											<tr>
+												<th>Jenis Ujian</th>
+												<th>Nama Tes</th>
+												<th>Jadwal Ujian</th>
+												<th>Status</th>
+											</tr>
+										</thead>
+										<tbody>
+											{% for row in jadwal %}
+											<tr>
+												<td>{{ row.nama_kegiatan }}</td>
+												<td>{{ row.nama_tes }}</td>
+												<td>{{ row.jadwal_text }}</td>
+												<td>{% if row.valid %}<span class="badge badge-success">Aktif</span>{% else %}<span class="badge badge-danger">Tidak Aktif</span>{% endif %}</td>
+											</tr>
+											{% endfor %}
+										</tbody>
+									</table>
+									<div class="row my-3">
+										<div class="col-sm-6 py-1"><a href="{{ base_url }}peserta/exam/intro" class="btn btn-primary w-100 btn-form-ajax">Tutorial Ujian</a></div>
+										{% if validasi.jadwal %}<div class="col-sm-6 py-1"><a href="javascript:;" id="btnMulai" class="btn btn-success w-100 ml-auto">Mulai Ujian</a></div>{% endif %}
+									</div>
+								{% else %}
+									<div class="alert alert-primary">Jadwal Ujian dapat dilihat setelah lolos Verifikasi Pusat</div>
+								{% endif %}
+							</div>
+							<div class="tab-pane fade" id="v-pills-kartu" role="tabpanel" aria-labelledby="v-pills-kartu-tab">
+								<h6 class="mb-4"><strong><span class="fa fa-id-card mr-2"></span> Kartu Peserta</strong></h6>
+								{% if validasi.lulusPusat %}
+									{% if validasi.berkas %}
+										<div class="embed-responsive embed-responsive-16by9" style="height: 600px">
+											<iframe class="embed-responsive-item" id="kartu" name="kartu" src="{{ base_url }}peserta/cetak/individual"></iframe>
+										</div>
+										<button type="button" class="btn btn-primary" onclick="window.frames['kartu'].focus();window.frames['kartu'].print();"><span class="fa fa-print"></span> Cetak</button>
+									
+									{% else %}
+										<div class="alert alert-primary">Mohon maaf, data Anda masih dalam tahap Verifikasi Berkas, silahkan cek secara berkala</div>
+									{% endif %}
+								
+								{# {% elseif validasi.ditolak %}
+								<div class="alert alert-danger">Mohon maaf, Peserta Ujian tidak lolos verifikasi</div> #}
+								
+								{% else %}
+									<div class="alert alert-primary">
+										Kartu Peserta dapat dilihat setelah lolos Verifikasi Pusat
+									</div>
+								{% endif %}
+							</div>
+							<div class="tab-pane fade" id="v-pills-sertifikat" role="tabpanel" aria-labelledby="v-pills-sertifikat-tab">
+								<h6 class="mb-4"><strong><span class="fa fa-file-pdf mr-2"></span> Sertifikat</strong></h6>
+								{% if validasi.diterima and false %}
+								<div class="embed-responsive embed-responsive-16by9">
+									<iframe class="embed-responsive-item" src="{{ base_url }}peserta/cetak/sertifikat"></iframe>
+								</div>
+								{% else %}
+								<div class="alert alert-primary">Sertifikat akan muncul setelah ujian selesai</div>
+								{% endif %}
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock %}

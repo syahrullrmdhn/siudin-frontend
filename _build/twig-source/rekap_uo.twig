@@ -1,0 +1,159 @@
+{% extends "admin.twig" %}
+
+{% block content %}
+ <style type="text/css">
+   table,th, td{
+   border: 1px solid black;
+   border-collapse: collapse; }
+   table{ width: 100%; }
+   th, td{ text-align:center; }
+  </style>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <i class="fa fa-book"></i>&nbsp;&nbsp;&nbsp;Rekapitulasi Peserta Ujian per UO
+        </div>
+        <div class="panel-body">
+            <div class="card">
+                <div class="card-header" style="text-align: center !important">
+                    <h4>Rekapitulasi Peserta Ujian per UO</h4>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-lg-12 mt-4" style="font-size: 12px !important">
+                            <form action="{{base_url}}user/rekapverifikasi/printuo" action="get">
+                            <div class="form-group row">
+                                <label for="inputEmail3" class="col-sm-3 mt-2">*) Pilih UO / Kotama</label>
+                                <div class="col-sm-4">
+                                    <select class="form-control jabatan" name="kotama_id">
+                                        <option value="">All</option>
+                                            {% for key,val in ktma %}
+                                                <option value="{{ val.kotama_id }}">{{ val.nama_kotama }}</option>
+                                            {% endfor %}
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="inputEmail3" class="col-sm-3 mt-2">*) Pilih Tahun</label>
+                                <div class="col-sm-4">
+                                <select class="form-control jabatan" name="tahun_id">
+                                        <option value="">All</option>
+                                            {% for key,val in tahun %}
+                                                <option value="{{ val.tahun_id }}">{{ val.tahun }}</option>
+                                            {% endfor %}
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-sm-12" style="text-align: center !important">
+                                    <button type="submit" class="btn btn-info">Show</button>
+                                </div>
+                            </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block script %}
+<script>
+$(document).ready(function () {
+//daftar
+
+    var sum = 0;
+    $('.combat').each(function() {
+        sum += parseFloat($(this).text());
+    });
+    console.log(sum)
+    $('.total-combat').text(sum);
+
+
+//diterima
+    var sum2 = 0;
+    $('.jpt').each(function() {
+        sum2 += parseFloat($(this).text());
+    });
+    {# console.log(sum) #}
+    $('.tjpt').text(sum2);
+   
+//diteolak
+    var sum3 = 0;
+    $('.jptk').each(function() {
+        sum3 += parseFloat($(this).text());
+    });
+    $('.tjptk').text(sum3);
+
+//diteolak
+    var sum4 = 0;
+    $('.jsi').each(function() {
+        sum4 += parseFloat($(this).text());
+    });
+    $('.tjsi').text(sum4);
+
+//diteolak
+    var sum5 = 0;
+    $('.jst').each(function() {
+        sum5 += parseFloat($(this).text());
+    });
+    $('.tjst').text(sum5);
+
+ var sum6 = 0;
+    $('.jstk').each(function() {
+        sum6 += parseFloat($(this).text());
+    });
+    $('.tjstk').text(sum6);
+
+ var sum7 = 0;
+    $('.jki').each(function() {
+        sum7 += parseFloat($(this).text());
+    });
+    $('.tjki').text(sum7);
+
+ var sum8 = 0;
+    $('.jkt').each(function() {
+        sum8 += parseFloat($(this).text());
+    });
+    $('.tjkt').text(sum8);
+
+ var sum9 = 0;
+    $('.jktk').each(function() {
+        sum9 += parseFloat($(this).text());
+    });
+    $('.tjktk').text(sum9);
+
+ var sum10 = 0;
+    $('.jktr').each(function() {
+        sum10 += parseFloat($(this).text());
+    });
+    $('.tjktr').text(sum10);
+
+
+
+ var sum11 = 0;
+    $('.jpi').each(function() {
+        sum11 += parseFloat($(this).text());
+    });
+    $('.tjpi').text(sum11);
+
+ var sum12 = 0;
+    $('.jput').each(function() {
+        sum12 += parseFloat($(this).text());
+    });
+    $('.tjput').text(sum12);
+
+ var sum13 = 0;
+    $('.jputk').each(function() {
+        sum13 += parseFloat($(this).text());
+    });
+    $('.tjputk').text(sum13);
+
+ var sum14 = 0;
+    $('.jpur').each(function() {
+        sum14 += parseFloat($(this).text());
+    });
+    $('.tjpur').text(sum14);
+});
+</script>
+
+{% endblock %}

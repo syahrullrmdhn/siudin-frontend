@@ -1,0 +1,227 @@
+<!doctype html>
+<html lang="en" class="fullscreen-bg">
+
+<head>
+    <title>{{ system_title }}</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    
+	<link rel="icon" href="{{ system_logo }}">
+    <link rel="stylesheet" href="{{ base_url }}vendor/bootstrap-v4/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ base_url }}vendor/font-awesome-5/css/all.min.css">
+    <link rel="stylesheet" href="{{ base_url }}vendor/intro/introjs.min.css">
+    <link rel="stylesheet" href="{{ base_url }}assets/css/roboto.min.css?_dc={{ current_time }}">
+    <link rel="stylesheet" href="{{ base_url }}assets/css/tinymce.css?_dc={{ current_time }}">
+    <link rel="stylesheet" href="{{ base_url }}assets/css/new.min.css?_dc={{ current_time }}">
+</head>
+
+<body>
+    <div class="params" style="display: none" data-materi="{{ materi }}" data-tingkat="{{ tingkat }}" data-babon="{{ babon }}"></div>
+    <div class="wrapper">
+		<div class="header">
+            <div class="header-left">
+                <div class="logo"><img src="{{ system_logo }}"></div>
+                <div class="title">
+                    <h2>{{ system_organization }}</h2>
+                    <h2>{{ system_office }}</h2>
+                    <h6>{{ system_name }}</h6>
+                </div>
+            </div>
+            <div class="header-toggle">
+                <a href="javascript:;" id="sidebar-toggle"><span class="fa fa-bars"></span></a>
+            </div>
+            <div class="header-right">
+                <div class="user-text">
+                    {% if user_login %}
+						<h6>{{ user_login }}</h6>
+						<!--<a href="javascript:;" id="btnLogout" class="btn btn-sm btn-secondary logout btnLogout">Logout</a>-->
+					{% endif %}
+                </div>
+                <div class="user-icon">
+                    <!--<span class="fa fa-user-graduate"></soan>-->
+                    <div class="photo"><img src="{% if peserta.foto %}{{ base_url }}{{ peserta.foto }}{% else %}{{ base_url }}assets/img/men.png{% endif %}"></div>
+                </div>
+            </div>
+        </div>
+        <div class="main exam">
+            <div class="sidebar">
+                <div class="photobox">
+                    {% if system_camera == '1' %}
+                    <div class="webcam-wrapper overflow-hidden" style="border-radius: 10px 10px 0 0"><div class="webcam" id="webcam-image"></div></div>
+                    {% else %}
+                    <div class="photo"><img src="{% if peserta.foto %}{{ base_url }}{{ peserta.foto }}{% else %}{{ base_url }}assets/img/men.png{% endif %}"></div>
+                    <div class="photo-id">{{ peserta.nip }}</div>
+                    <div class="photo-name">{{ peserta.nama }}</div>
+                    {% endif %}
+                </div>
+                <div class="sidebar-title">
+                    Structure
+                </div>
+                <div class="sidebar-content">
+                    <ul class="nomor-soal" id="nomor-soal">
+                        {% for n in nomor %}
+                            <li>
+                                <a href="javascript:void(0)" class="soal-nomor-link {% if n == 1 %}active{% endif %}">
+                                    {{ n }}
+                                    <span class="soal-nomor-link-jawab">{% if n == 1 %}A{% endif %}</span>
+                                </a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                <div class="sidebar-footer">
+                    <button class="btn btn-sm btn-secondary" id="sidebar-close"><span class="fa fa-times"></span></button>
+                </div>
+            </div>
+            <div class="content">
+                <div class="bar-top">
+					<span class="soal-nomor-text">SOAL NOMOR</span>
+					<div class="soal-title" id="page">1</div>
+					<div id="page-count" style="display:none"></div>
+					<div class="right">
+                        <button class="btn btn-light btn-zoom-out">
+							<span class="fa fa-search-minus"></span>
+						</button>
+                        <button class="btn btn-light btn-zoom-in">
+							<span class="fa fa-search-plus"></span>
+						</button>
+						<div class="timer js-ujian">
+							<div class="timer-label d-none d-sm-block">Sisa Waktu</div>
+							<div class="timer-time" id="timer">12:01</div>
+						</div>
+                        <!--
+                        <button class="btn btn-primary btn-webcam" data-toggle="modal" data-target="#webcam">
+							<span class="fa fa-camera"></span>
+						</button>
+                        -->
+					</div>
+				</div>
+				<div class="soal-wrapper" id="content">
+					<div class="soal">{{ soal | raw }}</div>
+                    <div class="jawaban-img-container">
+                        <div class="jawaban-img-border">
+                            <div class="jawaban-img-title">
+                                JAWABAN
+                            </div>
+                            <div class="jawaban-img-wrapper">
+                                <a href="javascript:;" class="jawaban-mce jawaban active">A</a>
+                                <a href="javascript:;" class="jawaban-mce jawaban">B</a>
+                                <a href="javascript:;" class="jawaban-mce jawaban">C</a>
+                                <a href="javascript:;" class="jawaban-mce jawaban">D</a>
+                                <a href="javascript:;" class="jawaban-mce jawaban">E</a>
+                            </div>
+                        </div>
+                    </div>
+				</div>
+				<div class="button-wrapper">
+					<button id="soal-back" class="btn btn-sm btn-light sebelum js-ujian">
+						<span class="fa fa-arrow-left"></span><span class="btn-text">Sebelumnya</span>
+					</button>
+					<button id="soal-next" class="btn btn-sm btn-light sesudah js-ujian">
+						<span class="btn-text">Selanjutnya</span><span class="fa fa-arrow-right"></span>
+					</button>
+                    
+					<button id="soal-ragu" class="btn btn-sm btn-warning ragu js-ujian">
+						<div class="check-ragu"></div>Ragu Ragu
+					</button>
+					<a href="{{ base_url }}peserta/exam" id="soal-selesai" class="btn btn-sm btn-success">
+						SELESAI<span class="fa fa-check-circle"></span>
+					</a>
+				</div>
+            </div>
+        </div>
+        {% block content %}
+
+    	{% endblock %}
+    </div>
+	{% block modal %}
+        <!--
+        <div class="modal fade" id="webcam" role="dialog" aria-labelledby="webcam" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Webcam</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body d-flex align-items-center justify-content-center">
+                        <div class="webcam" id="webcam-image"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        -->
+    {% endblock %}
+
+    <script>
+	    var baseURL = '{{ base_url }}';
+	    var uniqueID = '{{ app.key }}';
+	</script>
+
+	<script src="{{ base_url }}vendor/jquery/jquery-3.2.1.min.js"></script>
+	<script src="{{ base_url }}vendor/jquery/jquery.form.min.js"></script>
+    <script src="{{ base_url }}vendor/jquery/jquery.slimscroll.min.js"></script>
+	<script src="{{ base_url }}vendor/bootstrap-v4/js/bootstrap.min.js"></script>
+    <script src="{{ base_url }}vendor/webcam/webcam.min.js"></script>
+    <script src="{{ base_url }}vendor/intro/intro.min.js"></script>
+	<script src="{{ base_url }}assets/js/custom.min.js?_dc={{ current_time }}"></script>
+    <script>
+        introJs().setOptions({
+            steps: [{
+                element: document.querySelector('.photobox'),
+                intro: 'Bagian ini berisi foto peserta, nomor peserta dan nama peserta'
+            }, {
+                element: document.querySelector('.sidebar-title'),
+                intro: 'Bagian ini berisi nama tes/subtes yang sedang dikerjakan'
+            }, {
+                title: 'Daftar Nomor Soal',
+                element: document.querySelector('.nomor-soal'),
+                intro: 'Bagian ini berisi daftar nomor soal, klik pada nomor soal untuk berpindah soal, apabila soal sudah dijawab maka jawaban akan tampil di pojok kanan atas nomor soal'
+            }, {
+                title: 'Soal Sebelumnya',
+                element: document.querySelector('#soal-back'),
+                intro: 'Tombol ini digunakan untuk kembali ke soal sebelumnya'
+            }, {
+                title: 'Soal Selanjutnya',
+                element: document.querySelector('#soal-next'),
+                intro: 'Tombol ini digunakan untuk melanjutkan ke soal berikutnya'
+            }, {
+                title: 'Ragu-Ragu',
+                element: document.querySelector('#soal-ragu'),
+                intro: 'Tombol ini digunakan untuk menandai soal yang jawabannya masih ragu-ragu'
+            }, {
+                title: 'Soal',
+                element: document.querySelector('.soal'),
+                intro: 'Bagian ini akan menampilkan soal dan pilihan jawaban'
+            }, {
+                title: 'Menjawab Soal',
+                element: document.querySelector('.jawaban-img-wrapper'),
+                intro: 'Bagian ini akan digunakan untuk menjawab soal, bisa menggunakan mouse dengan cara klik pada jawaban atau menggunakan keyboard A, B, C, D, E'
+            }, {
+                title: 'Soal Aktif',
+                element: document.querySelector('.soal-title'),
+                intro: 'Bagian ini berisi nomor soal yang sedang dikerjakan'
+            }, {
+                title: 'Zoom Out',
+                element: document.querySelector('.btn-zoom-out'),
+                intro: 'Tombol ini digunakan untuk memperkecil tampilan soal'
+            }, {
+                title: 'Zoom In',
+                element: document.querySelector('.btn-zoom-in'),
+                intro: 'Tombol ini digunakan untuk memperbesar tampilan soal'
+            }, {
+                title: 'Sisa Waktu',
+                element: document.querySelector('.timer'),
+                intro: 'Bagian ini berisi waktu yang tersisa'
+            }, {
+                title: 'Selesai',
+                element: document.querySelector('#soal-selesai'),
+                intro: 'Tombol ini digunakan untuk menyelesaikan ujian, tombol selesai akan aktif 1 menit sebelum waktu habis'
+            }]
+        }).start();
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,21 @@
+{% extends "cetak.twig" %}
+{% block content %}
+
+<div class="page">
+	<table class="datatable full">
+		<tr>
+			<th>Kode Server</th>
+			<th>Nama Ruang</th>
+			<th>Peserta dalam Server</th>
+		</tr>
+		{% for row in rekap %}
+			<tr>
+				<td>{{ row.kd_server }}</td>
+				<td>{{ row.nm_ruang }}</td>
+				<td align="right">{{ row.jm_pes }}</td>
+			</tr>
+		{% endfor %}
+	</table>
+</div>
+
+{% endblock %}

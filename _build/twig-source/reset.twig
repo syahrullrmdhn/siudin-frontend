@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+		<title>{{ system_title }}</title>
+
+		<link rel="icon" href="{{ system_logo }}" sizes="32x32"/>
+		<link rel="stylesheet" href="{{ base_url }}vendor/bootstrap-4/css/bootstrap.min.css"/>
+		<link rel="stylesheet" href="{{ base_url }}vendor/sweetalert2/sweetalert2.min.css">
+
+		<link href="{{ base_url }}assets/css/front.min.css" rel="stylesheet"/>
+	</head>
+	<body>
+		<div class="container-fluid">
+			<div class="row min-vh-100 d-flex justify-content-center align-items-center">
+				<div class="col-sm-9 py-3 mw-900">
+					<div class="card">
+						<div class="card-body p-0">
+							<div class="row h-100 no-gutters">
+								<div class="col-md-5 text-white text-center bg-card-gradient">
+									<div class="position-relative p-4 pt-md-5 pb-md-7">
+										<div class="bg-holder bg-auth-card-shape"></div>
+										<div class="z-index-1 position-relative">
+											<a class="text-white mb-4 text-sans-serif font-weight-extra-bold fs-4 d-inline-block" href="{{ base_url }}">
+												<img src="{{ system_logo }}" width="80">
+											</a>
+											<p class="text-white text-center opacity-75">
+												<span class="f-12">{{ system_organization }}</span><br>
+												<span class="f-12">{{ system_office }}</span><br>
+												<span class="f-10">{{ system_name|upper }}</span>
+											</p>
+										</div>
+									</div>
+									<div class="mt-3 mb-4 mt-md-4 mb-md-5">
+										<p class="pt-3">Sudah Punya Akun ?<br><a class="btn btn-outline-light mt-2 px-4" href="{{ base_url }}">Login</a>
+										</p>
+									</div>
+								</div>
+								<div class="col-md-7 d-flex flex-center">
+									<div class="p-3 flex-grow-1">
+										<h3>Reset Password</h3>
+										<form class="needs-validation" novalidate action="{{ base_url }}api/v1/reset" method="post" name="form-reset" id="form-reset">
+											<div class="form-group">
+												<label for="password">Password</label>
+												<input class="form-control form-control-sm" type="password" id="password" name="password" required>
+												<div class="invalid-feedback">Password harus diisi</div>
+											</div>
+											<div class="form-group">
+												<label for="re_password">Konfirmasi Password</label>
+												<input class="form-control form-control-sm" type="password" id="re_password" name="re_password" required>
+												<div class="invalid-feedback">Konfirmasi Password harus diisi</div>
+											</div>
+											<div class="form-group">
+                                                <input type="hidden" name="id" value="{{ id }}">
+                                                <input type="hidden" name="checksum" value="{{ checksum }}">
+												<button class="btn btn-primary btn-block mt-3" type="submit" name="reset" id="btnReset">Reset</button>
+											</div>
+										</form>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script>
+			var baseURL = '{{ base_url }}';
+		</script>
+
+		<script src="{{ base_url }}vendor/jquery/jquery-3.2.1.min.js"></script>
+		<script src="{{ base_url }}vendor/jquery/jquery-migrate-1.4.1.min.js"></script>
+		<script src="{{ base_url }}vendor/jquery/jquery.form.min.js"></script>
+		<script src="{{ base_url }}vendor/bootstrap-4/js/bootstrap.min.js"></script>
+		<script src="{{ base_url }}vendor/bootstrap-4/js/popper.min.js"></script>
+		<script src="{{ base_url }}vendor/sweetalert2/sweetalert2.min.js"></script>
+
+        <script>
+            var forms = document.getElementsByClassName('needs-validation');
+            var validation = Array.prototype.filter.call(forms, function (form) {
+                form.addEventListener('submit', function (event) {
+                    if (form.checkValidity() === false) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    } else {
+                        $('#form-reset').ajaxForm({
+                            dataType:'json',
+                            beforeSubmit: function() {
+                                $('input').each(function() {
+                                    $(this).trigger('blur');
+                                });
+                            },
+                            success: function(a, b) {
+                                if (a.success) {
+                                    Swal.fire('Informasi', a.msg, 'success').then((result) => {
+                                        parent.location = baseURL;
+                                    });
+                                } else {
+                                    Swal.fire('Peringatan', a.msg, 'warning')
+                                }
+                            }
+                        });
+
+                        $('#form-reset').submit();
+
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
+                    
+                    form.classList.add('was-validated');
+                }, false);
+            });
+        </script>
+	</body>
+</html>
